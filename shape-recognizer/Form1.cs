@@ -53,7 +53,7 @@ namespace shape_recognizer
         {
             if(graphObj != null)
             {
-                graphObj.Clear(Color.White);
+                graphObj.Clear(graphPanel.BackColor);
             }
         }
     }
