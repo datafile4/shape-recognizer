@@ -30,6 +30,7 @@
         {
             this.graphPanel = new System.Windows.Forms.Panel();
             this.buttonClear = new System.Windows.Forms.Button();
+            this.labelPoint = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // graphPanel
@@ -53,11 +54,20 @@
             this.buttonClear.UseVisualStyleBackColor = true;
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
+            // labelPoint
+            // 
+            this.labelPoint.AutoSize = true;
+            this.labelPoint.Location = new System.Drawing.Point(350, 316);
+            this.labelPoint.Name = "labelPoint";
+            this.labelPoint.Size = new System.Drawing.Size(0, 13);
+            this.labelPoint.TabIndex = 2;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(404, 341);
+            this.Controls.Add(this.labelPoint);
             this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.graphPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -67,6 +77,7 @@
             this.Name = "Form1";
             this.Text = "Shape Recognizer";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -74,6 +85,7 @@
 
         private System.Windows.Forms.Panel graphPanel;
         private System.Windows.Forms.Button buttonClear;
+        private System.Windows.Forms.Label labelPoint;
     }
 }
 

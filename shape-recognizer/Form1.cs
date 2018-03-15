@@ -15,6 +15,7 @@ namespace shape_recognizer
         private Graphics graphObj;
         private Point _lastLoc;
         bool mouseIsDown = false;
+        List<Point> points_list = new List<Point>();
 
         public Form1()
         {
@@ -28,6 +29,7 @@ namespace shape_recognizer
                 mouseIsDown = true;
                 graphObj = this.graphPanel.CreateGraphics();
                 _lastLoc = e.Location;
+                points_list.Add(e.Location);
             }
         }
 
@@ -36,7 +38,9 @@ namespace shape_recognizer
             if (mouseIsDown)
             {                
                 paintCurrentPosition(e.Location, 2, Color.Blue);
+                points_list.Add(e.Location);
             }
+            labelPoint.Text = e.Location.X.ToString() + "," + e.Location.Y.ToString();
         }
         private void paintCurrentPosition(Point loc, int thickness, Color colorPen)
         {           
