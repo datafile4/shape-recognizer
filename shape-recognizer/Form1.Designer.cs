@@ -45,7 +45,7 @@
             // 
             // buttonClear
             // 
-            this.buttonClear.Location = new System.Drawing.Point(155, 311);
+            this.buttonClear.Location = new System.Drawing.Point(158, 311);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(75, 23);
             this.buttonClear.TabIndex = 1;
@@ -57,9 +57,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(392, 342);
+            this.ClientSize = new System.Drawing.Size(404, 341);
             this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.graphPanel);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(420, 380);
+            this.MinimumSize = new System.Drawing.Size(420, 380);
             this.Name = "Form1";
             this.Text = "Shape Recognizer";
             this.ResumeLayout(false);
