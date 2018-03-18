@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MIConvexHull;
 
 namespace shape_recognizer
 {
@@ -40,7 +41,7 @@ namespace shape_recognizer
                 paintCurrentPosition(e.Location, 2, Color.Blue);
                 points_list.Add(e.Location);
             }
-            labelPoint.Text = e.Location.X.ToString() + "," + e.Location.Y.ToString();
+            labelPoint.Text = e.Location.X.ToString() + "," + e.Location.Y.ToString();            
         }
         private void paintCurrentPosition(Point loc, int thickness, Color colorPen)
         {           
@@ -51,6 +52,18 @@ namespace shape_recognizer
         private void graphPanel_MouseUp(object sender, MouseEventArgs e)
         {
             mouseIsDown = false;
+            var vertices = new Vertex[points_list.Count];
+            for(int i = 0; i< points_list.Count; i++)
+            {
+                vertices[i] = new Vertex(points_list[i].X, points_list[i].Y);
+            }
+            var convexHull = ConvexHull.Create(vertices).Points;
+            for(int i = 1; i< convexHull.Count(); i++)
+            {
+                graphObj.DrawLine(new Pen(Color.Red), new Point((int)convexHull.ElementAt(i-1).Position[0], (int)convexHull.ElementAt(i-1).Position[1]),
+                    new Point((int)convexHull.ElementAt(i).Position[0], (int)convexHull.ElementAt(i).Position[1]));
+            }
+            points_list.Clear();
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
