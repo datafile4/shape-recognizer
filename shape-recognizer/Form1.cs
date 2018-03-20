@@ -63,6 +63,8 @@ namespace shape_recognizer
                 graphObj.DrawLine(new Pen(Color.Red), new Point((int)convexHull.ElementAt(i-1).Position[0], (int)convexHull.ElementAt(i-1).Position[1]),
                     new Point((int)convexHull.ElementAt(i).Position[0], (int)convexHull.ElementAt(i).Position[1]));
             }
+            labelShapePointCountVal.Text = points_list.Count.ToString();
+            labelConvHullPntCntVal.Text = convexHull.Count().ToString();
             points_list.Clear();
         }
 
@@ -71,7 +73,14 @@ namespace shape_recognizer
             if(graphObj != null)
             {
                 graphObj.Clear(graphPanel.BackColor);
+                labelConvHullPntCntVal.Text = "";
+                labelShapePointCountVal.Text = "";
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
