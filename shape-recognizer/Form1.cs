@@ -23,6 +23,19 @@ namespace shape_recognizer
             InitializeComponent();
         }
 
+        private Rectangle BoundingBox(List<Point> points)
+        {
+            var x_query = from Point p in points select p.X;
+            int xmin = x_query.Min();
+            int xmax = x_query.Max();
+
+            var y_query = from Point p in points select p.Y;
+            int ymin = y_query.Min();
+            int ymax = y_query.Max();
+
+            return new Rectangle(xmin, ymin, xmax - xmin, ymax - ymin);
+        }
+
         private void graphPanel_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -65,6 +78,8 @@ namespace shape_recognizer
             }
             labelShapePointCountVal.Text = points_list.Count.ToString();
             labelConvHullPntCntVal.Text = convexHull.Count().ToString();
+            Rectangle boundingBox = BoundingBox(points_list);
+            graphObj.DrawRectangle(new Pen(Color.Black), boundingBox);
             points_list.Clear();
         }
 
