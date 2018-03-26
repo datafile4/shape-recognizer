@@ -8,5 +8,6 @@ namespace shape_recognizer
 {
     class Polygon2d
     {
+
     }
 }

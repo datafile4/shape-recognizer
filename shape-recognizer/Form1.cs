@@ -17,6 +17,7 @@ namespace shape_recognizer
         private Point _lastLoc;
         bool mouseIsDown = false;
         List<Point> points_list = new List<Point>();
+        IEnumerable<Vertex> convexHull;
 
         public Form1()
         {
@@ -36,6 +37,49 @@ namespace shape_recognizer
             return new Rectangle(xmin, ymin, xmax - xmin, ymax - ymin);
         }
 
+        private Point[] MaximalTriangle(IEnumerable<Vertex> points)
+        {
+            //sort points
+            Point[] result = new Point[3];
+            return result;
+        }
+
+        private Point Centroid(IEnumerable<Vertex> convexHull)
+        {
+            //from https://en.wikipedia.org/wiki/Centroid#Centroid_of_a_polygon
+            double polygonArea = 0;
+            for (int i = 0; i < convexHull.Count() - 1; i++)
+            {
+                polygonArea += convexHull.ElementAt(i).Position[0] * convexHull.ElementAt(i + 1).Position[1] -
+                    convexHull.ElementAt(i + 1).Position[0] * convexHull.ElementAt(i).Position[1];
+            }
+            polygonArea /= 2;
+
+            Point center = new Point();
+            for (int i = 0; i < convexHull.Count() - 1; i++)
+            {
+                center.X += (int)((convexHull.ElementAt(i).Position[0] + convexHull.ElementAt(i+1).Position[0])*
+                    (convexHull.ElementAt(i).Position[0] * convexHull.ElementAt(i + 1).Position[1] -
+                    convexHull.ElementAt(i + 1).Position[0] * convexHull.ElementAt(i).Position[1]));
+            }
+            center.X /= 6 * (int)polygonArea;
+
+            for (int i = 0; i < convexHull.Count() - 1; i++)
+            {
+                center.Y += (int)((convexHull.ElementAt(i).Position[1] + convexHull.ElementAt(i + 1).Position[1]) *
+                    (convexHull.ElementAt(i).Position[0] * convexHull.ElementAt(i + 1).Position[1] -
+                    convexHull.ElementAt(i + 1).Position[0] * convexHull.ElementAt(i).Position[1]));
+            }
+            center.Y /= 6 * (int)polygonArea;
+
+            return center;
+        }
+
+        private double AreaTriangle(Point a, Point b, Point c)
+        {
+            return Math.Abs((a.X - c.X) * (b.Y - a.Y) - (a.X - b.X) * (c.Y - a.Y));
+        }
+
         private void graphPanel_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -50,14 +94,14 @@ namespace shape_recognizer
         private void graphPanel_MouseMove(object sender, MouseEventArgs e)
         {
             if (mouseIsDown)
-            {                
+            {
                 paintCurrentPosition(e.Location, 2, Color.Blue);
                 points_list.Add(e.Location);
             }
-            labelPoint.Text = e.Location.X.ToString() + "," + e.Location.Y.ToString();            
+            labelPoint.Text = e.Location.X.ToString() + "," + e.Location.Y.ToString();
         }
         private void paintCurrentPosition(Point loc, int thickness, Color colorPen)
-        {           
+        {
             graphObj.DrawLine(new Pen(Color.Black), _lastLoc, loc);
             _lastLoc = loc;
         }
@@ -66,14 +110,14 @@ namespace shape_recognizer
         {
             mouseIsDown = false;
             var vertices = new Vertex[points_list.Count];
-            for(int i = 0; i< points_list.Count; i++)
+            for (int i = 0; i < points_list.Count; i++)
             {
                 vertices[i] = new Vertex(points_list[i].X, points_list[i].Y);
             }
-            var convexHull = ConvexHull.Create(vertices).Points;
-            for(int i = 1; i< convexHull.Count(); i++)
+            convexHull = ConvexHull.Create(vertices).Points;
+            for (int i = 1; i < convexHull.Count(); i++)
             {
-                graphObj.DrawLine(new Pen(Color.Red), new Point((int)convexHull.ElementAt(i-1).Position[0], (int)convexHull.ElementAt(i-1).Position[1]),
+                graphObj.DrawLine(new Pen(Color.Red), new Point((int)convexHull.ElementAt(i - 1).Position[0], (int)convexHull.ElementAt(i - 1).Position[1]),
                     new Point((int)convexHull.ElementAt(i).Position[0], (int)convexHull.ElementAt(i).Position[1]));
             }
             labelShapePointCountVal.Text = points_list.Count.ToString();
@@ -85,7 +129,7 @@ namespace shape_recognizer
 
         private void buttonClear_Click(object sender, EventArgs e)
         {
-            if(graphObj != null)
+            if (graphObj != null)
             {
                 graphObj.Clear(graphPanel.BackColor);
                 labelConvHullPntCntVal.Text = "";
