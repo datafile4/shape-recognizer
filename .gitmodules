@@ -1,0 +1,3 @@
+[submodule "MIConvexHull"]
+	path = MIConvexHull
+	url = https://github.com/datafile4/MIConvexHull.git
