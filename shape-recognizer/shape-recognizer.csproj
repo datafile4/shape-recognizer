@@ -48,7 +48,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MIConvexHull">
-      <HintPath>..\MIConvexHull\MIConvexHull\bin\Release\MIConvexHull.dll</HintPath>
+      <HintPath>..\MIConvexHull\MIConvexHull\bin\Debug\MIConvexHull.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

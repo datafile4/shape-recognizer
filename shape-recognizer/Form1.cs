@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MIConvexHull;
-
 namespace shape_recognizer
 {
     public partial class Form1 : Form
