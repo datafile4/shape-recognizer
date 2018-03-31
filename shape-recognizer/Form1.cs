@@ -16,7 +16,7 @@ namespace shape_recognizer
         private Point _lastLoc;
         bool mouseIsDown = false;
         List<Point> points_list = new List<Point>();
-        IEnumerable<Vertex> convexHull;
+        List<Vertex> convexHull;
 
         public Form1()
         {
@@ -74,11 +74,35 @@ namespace shape_recognizer
             return center;
         }
 
-        private double AreaTriangle(Point a, Point b, Point c)
-        {
-            return Math.Abs((a.X - c.X) * (b.Y - a.Y) - (a.X - b.X) * (c.Y - a.Y));
-        }
+        private double AreaTriangle(Point a, Point b, Point c) => Math.Abs((a.X - c.X) * (b.Y - a.Y) - (a.X - b.X) * (c.Y - a.Y));
 
+        //private List<Vertex> DetectMaxTriangle(List<Vertex> _convexHull)
+        //{
+        //    var triangle = new List<Vertex>() { _convexHull[0], _convexHull[1], _convexHull[2] };
+        //    var bestTriple = new List<Vertex>() {_convexHull[0], _convexHull[1], _convexHull[2] };            
+        //    while (true)
+        //    {
+        //        while (true)
+        //        {
+        //            while (AreaTriangle(triangle[0],triangle[1],triangle[2]))
+        //            {
+
+        //            }
+        //        }
+        //    }
+        //    return bestTriple;
+
+        //}
+
+        private List<Point> VertexToPoint(List<Vertex> vertices)
+        {
+            List<Point> points = new List<Point>();
+            foreach (Vertex _vertex in vertices)
+            {
+                points.Add(new Point((int)_vertex.Position[0], (int)_vertex.Position[1]));
+            }
+            return points;
+        }
         private void graphPanel_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -113,11 +137,11 @@ namespace shape_recognizer
             {
                 vertices[i] = new Vertex(points_list[i].X, points_list[i].Y);
             }
-            convexHull = ConvexHull.Create(vertices).Points;
+            convexHull = ConvexHull.Create(vertices).Points.ToList();
             for (int i = 1; i < convexHull.Count(); i++)
             {
-                graphObj.DrawLine(new Pen(Color.Red), new Point((int)convexHull.ElementAt(i - 1).Position[0], (int)convexHull.ElementAt(i - 1).Position[1]),
-                    new Point((int)convexHull.ElementAt(i).Position[0], (int)convexHull.ElementAt(i).Position[1]));
+                graphObj.DrawLine(new Pen(Color.Red), new Point((int)convexHull[i - 1].Position[0], (int)convexHull[i - 1].Position[1]),
+                    new Point((int)convexHull[i].Position[0], (int)convexHull[i].Position[1]));
             }
             labelShapePointCountVal.Text = points_list.Count.ToString();
             labelConvHullPntCntVal.Text = convexHull.Count().ToString();
