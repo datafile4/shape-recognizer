@@ -36,13 +36,6 @@ namespace shape_recognizer
             return new Rectangle(xmin, ymin, xmax - xmin, ymax - ymin);
         }
 
-        private Point[] MaximalTriangle(IEnumerable<Vertex> points)
-        {
-            //sort points
-            Point[] result = new Point[3];
-            return result;
-        }
-
         private Point Centroid(IEnumerable<Vertex> convexHull)
         {
             //from https://en.wikipedia.org/wiki/Centroid#Centroid_of_a_polygon
@@ -57,7 +50,7 @@ namespace shape_recognizer
             Point center = new Point();
             for (int i = 0; i < convexHull.Count() - 1; i++)
             {
-                center.X += (int)((convexHull.ElementAt(i).Position[0] + convexHull.ElementAt(i+1).Position[0])*
+                center.X += (int)((convexHull.ElementAt(i).Position[0] + convexHull.ElementAt(i + 1).Position[0]) *
                     (convexHull.ElementAt(i).Position[0] * convexHull.ElementAt(i + 1).Position[1] -
                     convexHull.ElementAt(i + 1).Position[0] * convexHull.ElementAt(i).Position[1]));
             }
@@ -75,24 +68,60 @@ namespace shape_recognizer
         }
 
         private double AreaTriangle(Point a, Point b, Point c) => Math.Abs((a.X - c.X) * (b.Y - a.Y) - (a.X - b.X) * (c.Y - a.Y));
+        private List<Point> DetectMaxTriangle(List<Point> _convexHull)
+        {
+            //int[] triangleIndex = new int[3] { 0, 1, 2 };
+            int A = 0, B = 1, C = 2;
+            int bA = A, bB = B, bC = C; //best triple
+            int n = _convexHull.Count();
+            while (true)
+            {
+                while (true)
+                {
+                    while (AreaTriangle(_convexHull[A], _convexHull[B], _convexHull[C]) <= AreaTriangle(_convexHull[A], _convexHull[B], _convexHull[(C + 1) % n]))
+                    {
+                        C = (C + 1) % n;
+                    }
+                    if (AreaTriangle(_convexHull[A], _convexHull[B], _convexHull[C]) <= AreaTriangle(_convexHull[A], _convexHull[(B + 1) % n], _convexHull[C]))
+                    {
+                        B = (B + 1) % n;
+                        continue;
+                    }
+                    else
+                        break;
+                }
+                if (AreaTriangle(_convexHull[A], _convexHull[B], _convexHull[C]) > AreaTriangle(_convexHull[bA], _convexHull[bB], _convexHull[bC]))
+                {
+                    bA = A;
+                    bB = B;
+                    bC = C;
+                }
 
-        //private List<Vertex> DetectMaxTriangle(List<Vertex> _convexHull)
-        //{
-        //    var triangle = new List<Vertex>() { _convexHull[0], _convexHull[1], _convexHull[2] };
-        //    var bestTriple = new List<Vertex>() {_convexHull[0], _convexHull[1], _convexHull[2] };            
-        //    while (true)
-        //    {
-        //        while (true)
-        //        {
-        //            while (AreaTriangle(triangle[0],triangle[1],triangle[2]))
-        //            {
+                A = (A + 1) % n;
+                if (A == B)
+                    B = (B + 1) % n;
+                if (B == C)
+                    C = (C + 1) % n;
+                if (A == 0)
+                    break;
+            }
+            List<Point> result = new List<Point>() { _convexHull[bA], _convexHull[bB], _convexHull[bC] };
+            return result;
+        }
 
-        //            }
-        //        }
-        //    }
-        //    return bestTriple;
-
-        //}
+        private void DrawTriangle(List<Point> points)
+        {
+            if (graphObj != null || points.Count  <= 3)
+            {
+                var pen = new Pen(Color.Green);
+                graphObj.DrawLine(pen, points[0], points[1]);
+                graphObj.DrawLine(pen, points[1], points[2]);
+                graphObj.DrawLine(pen, points[0], points[2]);
+            } else
+            {
+                throw new Exception("Graph is null");
+            }
+        }
 
         private List<Point> VertexToPoint(List<Vertex> vertices)
         {
@@ -138,15 +167,21 @@ namespace shape_recognizer
                 vertices[i] = new Vertex(points_list[i].X, points_list[i].Y);
             }
             convexHull = ConvexHull.Create(vertices).Points.ToList();
-            for (int i = 1; i < convexHull.Count(); i++)
+            List<Point> convexHullPoints = VertexToPoint(convexHull);
+            for (int i = 1; i < convexHullPoints.Count(); i++)
             {
-                graphObj.DrawLine(new Pen(Color.Red), new Point((int)convexHull[i - 1].Position[0], (int)convexHull[i - 1].Position[1]),
-                    new Point((int)convexHull[i].Position[0], (int)convexHull[i].Position[1]));
+                //graphObj.DrawLine(new Pen(Color.Red), new Point((int)convexHull[i - 1].Position[0], (int)convexHull[i - 1].Position[1]),
+                //    new Point((int)convexHull[i].Position[0], (int)convexHull[i].Position[1]));
+                graphObj.DrawLine(new Pen(Color.Red), convexHullPoints[i - 1], convexHullPoints[i]);
             }
             labelShapePointCountVal.Text = points_list.Count.ToString();
-            labelConvHullPntCntVal.Text = convexHull.Count().ToString();
+            //labelConvHullPntCntVal.Text = convexHull.Count().ToString();
+            labelConvHullPntCntVal.Text = convexHullPoints.Count().ToString();
             Rectangle boundingBox = BoundingBox(points_list);
             graphObj.DrawRectangle(new Pen(Color.Black), boundingBox);
+            List<Point> biggestTriangle = DetectMaxTriangle(convexHullPoints);
+            //graphObj.DrawLines(new Pen(Color.Green), biggestTriangle.ToArray());
+            DrawTriangle(biggestTriangle);
             points_list.Clear();
         }
 
