@@ -145,6 +145,10 @@ namespace shape_recognizer
             perimeter += Math.Sqrt(Math.Pow(shape.Last().X - shape.First().X, 2) + Math.Pow(shape.Last().Y - shape.First().Y, 2));
             return perimeter;
         }
+
+        #region parameters for relations
+
+        #endregion
         private void graphPanel_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
