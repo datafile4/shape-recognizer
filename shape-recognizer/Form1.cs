@@ -132,6 +132,20 @@ namespace shape_recognizer
             }
             return points;
         }
+
+        private double PerimeterOfShape(List<Point> shape)
+        {
+            //perimeter of free shape will be sum of distances between all points
+            double perimeter = 0;
+            for(int i = 1; i < shape.Count; i++)
+            {
+                //distance between two points
+                perimeter += Math.Sqrt(Math.Pow(shape[i].X - shape[i-1].X,2) + Math.Pow(shape[i].Y - shape[i - 1].Y, 2));
+            }
+            //distance between last point and first point
+            perimeter += Math.Sqrt(Math.Pow(shape.Last().X - shape.First().X, 2) + Math.Pow(shape.Last().Y - shape.First().Y, 2));
+            return perimeter;
+        }
         private void graphPanel_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
