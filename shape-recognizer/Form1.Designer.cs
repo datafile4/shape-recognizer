@@ -35,6 +35,8 @@
             this.labelShapePointCountVal = new System.Windows.Forms.Label();
             this.labelConvHullPntCnt = new System.Windows.Forms.Label();
             this.labelConvHullPntCntVal = new System.Windows.Forms.Label();
+            this.labelCHPerimeter = new System.Windows.Forms.Label();
+            this.labelCHPerimeterValue = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // graphPanel
@@ -100,11 +102,30 @@
             this.labelConvHullPntCntVal.Size = new System.Drawing.Size(0, 13);
             this.labelConvHullPntCntVal.TabIndex = 6;
             // 
+            // labelCHPerimeter
+            // 
+            this.labelCHPerimeter.AutoSize = true;
+            this.labelCHPerimeter.Location = new System.Drawing.Point(9, 380);
+            this.labelCHPerimeter.Name = "labelCHPerimeter";
+            this.labelCHPerimeter.Size = new System.Drawing.Size(75, 13);
+            this.labelCHPerimeter.TabIndex = 7;
+            this.labelCHPerimeter.Text = "CH Perimeter: ";
+            // 
+            // labelCHPerimeterValue
+            // 
+            this.labelCHPerimeterValue.AutoSize = true;
+            this.labelCHPerimeterValue.Location = new System.Drawing.Point(80, 380);
+            this.labelCHPerimeterValue.Name = "labelCHPerimeterValue";
+            this.labelCHPerimeterValue.Size = new System.Drawing.Size(0, 13);
+            this.labelCHPerimeterValue.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 381);
+            this.ClientSize = new System.Drawing.Size(404, 402);
+            this.Controls.Add(this.labelCHPerimeterValue);
+            this.Controls.Add(this.labelCHPerimeter);
             this.Controls.Add(this.labelConvHullPntCntVal);
             this.Controls.Add(this.labelConvHullPntCnt);
             this.Controls.Add(this.labelShapePointCountVal);
@@ -114,8 +135,8 @@
             this.Controls.Add(this.graphPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(420, 420);
-            this.MinimumSize = new System.Drawing.Size(420, 420);
+            this.MaximumSize = new System.Drawing.Size(420, 440);
+            this.MinimumSize = new System.Drawing.Size(420, 440);
             this.Name = "Form1";
             this.Text = "Shape Recognizer";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -133,6 +154,8 @@
         private System.Windows.Forms.Label labelShapePointCountVal;
         private System.Windows.Forms.Label labelConvHullPntCnt;
         private System.Windows.Forms.Label labelConvHullPntCntVal;
+        private System.Windows.Forms.Label labelCHPerimeter;
+        private System.Windows.Forms.Label labelCHPerimeterValue;
     }
 }
 

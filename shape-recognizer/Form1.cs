@@ -16,7 +16,7 @@ namespace shape_recognizer
         private Point _lastLoc;
         bool mouseIsDown = false;
         List<Point> points_list = new List<Point>();
-        List<Vertex> convexHull;
+        //List<Vertex> convexHull;
 
         public Form1()
         {
@@ -70,7 +70,6 @@ namespace shape_recognizer
         private double AreaTriangle(Point a, Point b, Point c) => Math.Abs((a.X - c.X) * (b.Y - a.Y) - (a.X - b.X) * (c.Y - a.Y));
         private List<Point> DetectMaxTriangle(List<Point> _convexHull)
         {
-            //int[] triangleIndex = new int[3] { 0, 1, 2 };
             int A = 0, B = 1, C = 2;
             int bA = A, bB = B, bC = C; //best triple
             int n = _convexHull.Count();
@@ -171,7 +170,7 @@ namespace shape_recognizer
             graphObj.DrawLine(new Pen(Color.Black), _lastLoc, loc);
             _lastLoc = loc;
         }
-
+        //this is main function now
         private void graphPanel_MouseUp(object sender, MouseEventArgs e)
         {
             mouseIsDown = false;
@@ -180,22 +179,20 @@ namespace shape_recognizer
             {
                 vertices[i] = new Vertex(points_list[i].X, points_list[i].Y);
             }
-            convexHull = ConvexHull.Create(vertices).Points.ToList();
+            List<Vertex> convexHull = ConvexHull.Create(vertices).Points.ToList();
             List<Point> convexHullPoints = VertexToPoint(convexHull);
             for (int i = 1; i < convexHullPoints.Count(); i++)
             {
-                //graphObj.DrawLine(new Pen(Color.Red), new Point((int)convexHull[i - 1].Position[0], (int)convexHull[i - 1].Position[1]),
-                //    new Point((int)convexHull[i].Position[0], (int)convexHull[i].Position[1]));
                 graphObj.DrawLine(new Pen(Color.Red), convexHullPoints[i - 1], convexHullPoints[i]);
             }
             labelShapePointCountVal.Text = points_list.Count.ToString();
-            //labelConvHullPntCntVal.Text = convexHull.Count().ToString();
             labelConvHullPntCntVal.Text = convexHullPoints.Count().ToString();
             Rectangle boundingBox = BoundingBox(points_list);
             graphObj.DrawRectangle(new Pen(Color.Black), boundingBox);
             List<Point> biggestTriangle = DetectMaxTriangle(convexHullPoints);
-            //graphObj.DrawLines(new Pen(Color.Green), biggestTriangle.ToArray());
             DrawTriangle(biggestTriangle);
+            double perimeter = PerimeterOfShape(convexHullPoints);
+            labelCHPerimeterValue.Text = Math.Round(perimeter,2).ToString();
             points_list.Clear();
         }
 
@@ -206,6 +203,7 @@ namespace shape_recognizer
                 graphObj.Clear(graphPanel.BackColor);
                 labelConvHullPntCntVal.Text = "";
                 labelShapePointCountVal.Text = "";
+                labelCHPerimeterValue.Text = "";
             }
         }
 
