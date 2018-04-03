@@ -115,7 +115,7 @@ namespace shape_recognizer
                 var pen = new Pen(Color.Green);
                 graphObj.DrawLine(pen, points[0], points[1]);
                 graphObj.DrawLine(pen, points[1], points[2]);
-                graphObj.DrawLine(pen, points[0], points[2]);
+                graphObj.DrawLine(pen, points[2], points[0]);
             } else
             {
                 throw new Exception("Graph is null");
