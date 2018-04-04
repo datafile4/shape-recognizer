@@ -132,22 +132,22 @@ namespace shape_recognizer
             return points;
         }
 
-        private double PerimeterOfShape(List<Point> shape)
+        #region parameters for relations
+        private double PerimeterOfPolygon(List<Point> polygon)
         {
             //perimeter of free shape will be sum of distances between all points
             double perimeter = 0;
-            for(int i = 1; i < shape.Count; i++)
+            for (int i = 1; i < polygon.Count; i++)
             {
                 //distance between two points
-                perimeter += Math.Sqrt(Math.Pow(shape[i].X - shape[i-1].X,2) + Math.Pow(shape[i].Y - shape[i - 1].Y, 2));
+                perimeter += Math.Sqrt(Math.Pow(polygon[i].X - polygon[i - 1].X, 2) + Math.Pow(polygon[i].Y - polygon[i - 1].Y, 2));
             }
             //distance between last point and first point
-            perimeter += Math.Sqrt(Math.Pow(shape.Last().X - shape.First().X, 2) + Math.Pow(shape.Last().Y - shape.First().Y, 2));
+            perimeter += Math.Sqrt(Math.Pow(polygon.Last().X - polygon.First().X, 2) + Math.Pow(polygon.Last().Y - polygon.First().Y, 2));
             return perimeter;
         }
-
-        #region parameters for relations
         //https://web.archive.org/web/20100405070507/http://valis.cs.uiuc.edu/~sariel/research/CG/compgeom/msg00831.html
+        //http://www.mathopenref.com/coordpolygonarea.html
         double PolygonArea(List<Point> polygon)
         {
             double area = 0;
@@ -206,7 +206,7 @@ namespace shape_recognizer
             graphObj.DrawRectangle(new Pen(Color.Black), boundingBox);
             List<Point> biggestTriangle = DetectMaxTriangle(convexHullPoints);
             DrawTriangle(biggestTriangle);
-            double perimeter = PerimeterOfShape(convexHullPoints);
+            double perimeter = PerimeterOfPolygon(convexHullPoints);
             labelCHPerimeterValue.Text = Math.Round(perimeter,2).ToString();
             points_list.Clear();
         }
