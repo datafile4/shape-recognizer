@@ -147,7 +147,18 @@ namespace shape_recognizer
         }
 
         #region parameters for relations
-
+        //https://web.archive.org/web/20100405070507/http://valis.cs.uiuc.edu/~sariel/research/CG/compgeom/msg00831.html
+        double PolygonArea(List<Point> polygon)
+        {
+            double area = 0;
+            for(int i = 0; i<polygon.Count; i++)
+            {
+                int j = (i+1)% polygon.Count;
+                area = area + polygon[i].X * polygon[j].Y;
+                area = area - polygon[i].Y * polygon[j].X;
+            }
+            return area/2;
+        }
         #endregion
         private void graphPanel_MouseDown(object sender, MouseEventArgs e)
         {
