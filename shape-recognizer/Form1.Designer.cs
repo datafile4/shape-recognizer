@@ -37,6 +37,7 @@
             this.labelConvHullPntCntVal = new System.Windows.Forms.Label();
             this.labelCHPerimeter = new System.Windows.Forms.Label();
             this.labelCHPerimeterValue = new System.Windows.Forms.Label();
+            this.tableLayoutPanelValues = new System.Windows.Forms.TableLayoutPanel();
             this.SuspendLayout();
             // 
             // graphPanel
@@ -119,11 +120,27 @@
             this.labelCHPerimeterValue.Size = new System.Drawing.Size(0, 13);
             this.labelCHPerimeterValue.TabIndex = 8;
             // 
+            // tableLayoutPanelValues
+            // 
+            this.tableLayoutPanelValues.ColumnCount = 2;
+            this.tableLayoutPanelValues.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 66.27219F));
+            this.tableLayoutPanelValues.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.72781F));
+            this.tableLayoutPanelValues.Location = new System.Drawing.Point(391, 12);
+            this.tableLayoutPanelValues.Name = "tableLayoutPanelValues";
+            this.tableLayoutPanelValues.RowCount = 4;
+            this.tableLayoutPanelValues.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelValues.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelValues.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelValues.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelValues.Size = new System.Drawing.Size(169, 83);
+            this.tableLayoutPanelValues.TabIndex = 9;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 402);
+            this.ClientSize = new System.Drawing.Size(584, 401);
+            this.Controls.Add(this.tableLayoutPanelValues);
             this.Controls.Add(this.labelCHPerimeterValue);
             this.Controls.Add(this.labelCHPerimeter);
             this.Controls.Add(this.labelConvHullPntCntVal);
@@ -135,8 +152,8 @@
             this.Controls.Add(this.graphPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(420, 440);
-            this.MinimumSize = new System.Drawing.Size(420, 440);
+            this.MaximumSize = new System.Drawing.Size(600, 440);
+            this.MinimumSize = new System.Drawing.Size(600, 440);
             this.Name = "Form1";
             this.Text = "Shape Recognizer";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -156,6 +173,7 @@
         private System.Windows.Forms.Label labelConvHullPntCntVal;
         private System.Windows.Forms.Label labelCHPerimeter;
         private System.Windows.Forms.Label labelCHPerimeterValue;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelValues;
     }
 }
 

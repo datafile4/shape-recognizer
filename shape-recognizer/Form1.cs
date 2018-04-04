@@ -17,6 +17,12 @@ namespace shape_recognizer
         bool mouseIsDown = false;
         List<Point> points_list = new List<Point>();
         //List<Vertex> convexHull;
+        Label labelClassTriangle;
+        Label labelClassTriangleValue;
+        Label labelClassRectangle;
+        Label labelClassRectangleValue;
+        Label lableClassCirle;
+        Label lableClassCirleValue;
 
         public Form1()
         {
@@ -159,7 +165,7 @@ namespace shape_recognizer
             }
             return area/2;
         }
-        #endregion
+        #endregion        
         private void graphPanel_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -208,7 +214,10 @@ namespace shape_recognizer
             DrawTriangle(biggestTriangle);
             double perimeter = PerimeterOfPolygon(convexHullPoints);
             labelCHPerimeterValue.Text = Math.Round(perimeter,2).ToString();
+            double triangleRelation = AreaTriangle(biggestTriangle[0], biggestTriangle[1], biggestTriangle[2]) /PolygonArea(convexHullPoints);
+            labelClassTriangleValue.Text = Math.Round(triangleRelation,4).ToString();
             points_list.Clear();
+            vertices = null;
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
@@ -224,7 +233,16 @@ namespace shape_recognizer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            labelClassTriangle = new Label();
+            labelClassTriangle.Text = "Triangle";
+            tableLayoutPanelValues.Controls.Add(labelClassTriangle, 0, 0);
+            labelClassTriangleValue = new Label();
+            tableLayoutPanelValues.Controls.Add(labelClassTriangleValue, 1, 0);
+            labelClassRectangle = new Label();
+            labelClassRectangleValue = new Label();
+            labelClassRectangle.Text = "Rectangle";
+            tableLayoutPanelValues.Controls.Add(labelClassRectangle,0,1);
+            tableLayoutPanelValues.Controls.Add(labelClassRectangleValue, 1, 1);
         }
     }
 }
