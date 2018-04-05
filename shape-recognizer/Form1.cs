@@ -222,8 +222,14 @@ namespace shape_recognizer
             DrawTriangle(biggestTriangle);
             double perimeter = PerimeterOfPolygon(convexHullPoints);
             labelCHPerimeterValue.Text = Math.Round(perimeter,2).ToString();
+            #region relations
             double triangleRelation = AreaTriangle(biggestTriangle[0], biggestTriangle[1], biggestTriangle[2]) /PolygonArea(convexHullPoints);
-            
+            labelAltachValue.Text = Math.Round(triangleRelation, 5).ToString();
+            double lenPch = PerimeterOfPolygon(points_list)/PerimeterOfPolygon(convexHullPoints);
+            labelLenpchValue.Text = Math.Round(lenPch, 5).ToString();
+            double pch2Arch = PerimeterOfPolygon(convexHullPoints) / PolygonArea(convexHullPoints);
+            labelPchachValue.Text = Math.Round(pch2Arch, 5).ToString();
+            #endregion
             points_list.Clear();
             vertices = null;
         }
@@ -264,9 +270,13 @@ namespace shape_recognizer
             labelPchper.Text = "Pch/Per";
             tableLayoutPanelValues.Controls.Add(labelPchper, 0, 3);
             labelLenpchValue = new Label();
+            tableLayoutPanelValues.Controls.Add(labelLenpchValue, 1, 0);
             labelPchachValue = new Label();
+            tableLayoutPanelValues.Controls.Add(labelPchachValue, 1, 1);
             labelAltachValue = new Label();
+            tableLayoutPanelValues.Controls.Add(labelAltachValue, 1, 2);
             labelPchperValue = new Label();
+            tableLayoutPanelValues.Controls.Add(labelPchperValue, 1, 3);
         }
     }
 }
