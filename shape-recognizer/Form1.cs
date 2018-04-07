@@ -223,12 +223,15 @@ namespace shape_recognizer
             double perimeter = PerimeterOfPolygon(convexHullPoints);
             labelCHPerimeterValue.Text = Math.Round(perimeter,2).ToString();
             #region relations
+            double pch = PerimeterOfPolygon(convexHullPoints);
             double triangleRelation = AreaTriangle(biggestTriangle[0], biggestTriangle[1], biggestTriangle[2]) /PolygonArea(convexHullPoints);
             labelAltachValue.Text = Math.Round(triangleRelation, 5).ToString();
-            double lenPch = PerimeterOfPolygon(points_list)/PerimeterOfPolygon(convexHullPoints);
+            double lenPch = PerimeterOfPolygon(points_list) / pch;
             labelLenpchValue.Text = Math.Round(lenPch, 5).ToString();
-            double pch2Arch = PerimeterOfPolygon(convexHullPoints) / PolygonArea(convexHullPoints);
+            double pch2Arch =pch/ PolygonArea(convexHullPoints);
             labelPchachValue.Text = Math.Round(pch2Arch, 5).ToString();
+            double pchPer = pch / (2 * (boundingBox.Width + boundingBox.Height));
+            labelPchperValue.Text = Math.Round(pchPer, 5).ToString();
             #endregion
             points_list.Clear();
             vertices = null;
