@@ -16,13 +16,6 @@ namespace shape_recognizer
         private Point _lastLoc;
         bool mouseIsDown = false;
         List<Point> points_list = new List<Point>();
-        //List<Vertex> convexHull;
-        //Label labelClassTriangle;
-        //Label labelClassTriangleValue;
-        //Label labelClassRectangle;
-        //Label labelClassRectangleValue;
-        //Label lableClassCirle;
-        //Label lableClassCirleValue;
         Label labelLenpch;
         Label labelLenpchValue;
         Label labelPchach;
@@ -249,17 +242,7 @@ namespace shape_recognizer
         }
 
         private void Form1_Load(object sender, EventArgs e)
-        {
-            //labelClassTriangle = new Label();
-            //labelClassTriangle.Text = "Triangle";
-            //tableLayoutPanelValues.Controls.Add(labelClassTriangle, 0, 0);
-            //labelClassTriangleValue = new Label();
-            //tableLayoutPanelValues.Controls.Add(labelClassTriangleValue, 1, 0);
-            //labelClassRectangle = new Label();
-            //labelClassRectangleValue = new Label();
-            //labelClassRectangle.Text = "Rectangle";
-            //tableLayoutPanelValues.Controls.Add(labelClassRectangle,0,1);
-            //tableLayoutPanelValues.Controls.Add(labelClassRectangleValue, 1, 1);
+        {           
             labelLenpch = new Label();
             labelLenpch.Text = "Len/Pch";
             tableLayoutPanelValues.Controls.Add(labelLenpch, 0, 0);
