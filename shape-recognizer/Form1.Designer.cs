@@ -38,6 +38,8 @@
             this.labelCHPerimeter = new System.Windows.Forms.Label();
             this.labelCHPerimeterValue = new System.Windows.Forms.Label();
             this.tableLayoutPanelValues = new System.Windows.Forms.TableLayoutPanel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // graphPanel
@@ -53,7 +55,7 @@
             // 
             // buttonClear
             // 
-            this.buttonClear.Location = new System.Drawing.Point(158, 311);
+            this.buttonClear.Location = new System.Drawing.Point(12, 311);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(75, 23);
             this.buttonClear.TabIndex = 1;
@@ -135,11 +137,20 @@
             this.tableLayoutPanelValues.Size = new System.Drawing.Size(169, 83);
             this.tableLayoutPanelValues.TabIndex = 9;
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(392, 102);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(168, 150);
+            this.dataGridView1.TabIndex = 10;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 401);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.tableLayoutPanelValues);
             this.Controls.Add(this.labelCHPerimeterValue);
             this.Controls.Add(this.labelCHPerimeter);
@@ -157,6 +168,7 @@
             this.Name = "Form1";
             this.Text = "Shape Recognizer";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -174,6 +186,7 @@
         private System.Windows.Forms.Label labelCHPerimeter;
         private System.Windows.Forms.Label labelCHPerimeterValue;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelValues;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }
 

@@ -43,36 +43,36 @@ namespace shape_recognizer
             return new Rectangle(xmin, ymin, xmax - xmin, ymax - ymin);
         }
 
-        private Point Centroid(IEnumerable<Vertex> convexHull)
-        {
-            //from https://en.wikipedia.org/wiki/Centroid#Centroid_of_a_polygon
-            double polygonArea = 0;
-            for (int i = 0; i < convexHull.Count() - 1; i++)
-            {
-                polygonArea += convexHull.ElementAt(i).Position[0] * convexHull.ElementAt(i + 1).Position[1] -
-                    convexHull.ElementAt(i + 1).Position[0] * convexHull.ElementAt(i).Position[1];
-            }
-            polygonArea /= 2;
+        //private Point Centroid(IEnumerable<Vertex> convexHull)
+        //{
+        //    //from https://en.wikipedia.org/wiki/Centroid#Centroid_of_a_polygon
+        //    double polygonArea = 0;
+        //    for (int i = 0; i < convexHull.Count() - 1; i++)
+        //    {
+        //        polygonArea += convexHull.ElementAt(i).Position[0] * convexHull.ElementAt(i + 1).Position[1] -
+        //            convexHull.ElementAt(i + 1).Position[0] * convexHull.ElementAt(i).Position[1];
+        //    }
+        //    polygonArea /= 2;
 
-            Point center = new Point();
-            for (int i = 0; i < convexHull.Count() - 1; i++)
-            {
-                center.X += (int)((convexHull.ElementAt(i).Position[0] + convexHull.ElementAt(i + 1).Position[0]) *
-                    (convexHull.ElementAt(i).Position[0] * convexHull.ElementAt(i + 1).Position[1] -
-                    convexHull.ElementAt(i + 1).Position[0] * convexHull.ElementAt(i).Position[1]));
-            }
-            center.X /= 6 * (int)polygonArea;
+        //    Point center = new Point();
+        //    for (int i = 0; i < convexHull.Count() - 1; i++)
+        //    {
+        //        center.X += (int)((convexHull.ElementAt(i).Position[0] + convexHull.ElementAt(i + 1).Position[0]) *
+        //            (convexHull.ElementAt(i).Position[0] * convexHull.ElementAt(i + 1).Position[1] -
+        //            convexHull.ElementAt(i + 1).Position[0] * convexHull.ElementAt(i).Position[1]));
+        //    }
+        //    center.X /= 6 * (int)polygonArea;
 
-            for (int i = 0; i < convexHull.Count() - 1; i++)
-            {
-                center.Y += (int)((convexHull.ElementAt(i).Position[1] + convexHull.ElementAt(i + 1).Position[1]) *
-                    (convexHull.ElementAt(i).Position[0] * convexHull.ElementAt(i + 1).Position[1] -
-                    convexHull.ElementAt(i + 1).Position[0] * convexHull.ElementAt(i).Position[1]));
-            }
-            center.Y /= 6 * (int)polygonArea;
+        //    for (int i = 0; i < convexHull.Count() - 1; i++)
+        //    {
+        //        center.Y += (int)((convexHull.ElementAt(i).Position[1] + convexHull.ElementAt(i + 1).Position[1]) *
+        //            (convexHull.ElementAt(i).Position[0] * convexHull.ElementAt(i + 1).Position[1] -
+        //            convexHull.ElementAt(i + 1).Position[0] * convexHull.ElementAt(i).Position[1]));
+        //    }
+        //    center.Y /= 6 * (int)polygonArea;
 
-            return center;
-        }
+        //    return center;
+        //}
 
         private double AreaTriangle(Point a, Point b, Point c) => Math.Abs((a.X - c.X) * (b.Y - a.Y) - (a.X - b.X) * (c.Y - a.Y));
         private List<Point> DetectMaxTriangle(List<Point> _convexHull)
