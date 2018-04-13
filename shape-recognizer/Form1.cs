@@ -15,7 +15,8 @@ namespace shape_recognizer
         private Graphics graphObj;
         private Point _lastLoc;
         bool mouseIsDown = false;
-        List<Point> points_list = new List<Point>();
+        List<Point> pointList = new List<Point>();
+        List<Polygon2D> polygonList = new List<Polygon2D>();
         Label labelLenpch;
         Label labelLenpchValue;
         Label labelPchach;
@@ -174,7 +175,7 @@ namespace shape_recognizer
                 mouseIsDown = true;
                 graphObj = this.graphPanel.CreateGraphics();
                 _lastLoc = e.Location;
-                points_list.Add(e.Location);
+                pointList.Add(e.Location);
             }
         }
 
@@ -183,7 +184,7 @@ namespace shape_recognizer
             if (mouseIsDown)
             {
                 paintCurrentPosition(e.Location, 2, Color.Blue);
-                points_list.Add(e.Location);
+                pointList.Add(e.Location);
             }
             labelPoint.Text = e.Location.X.ToString() + "," + e.Location.Y.ToString();
         }
@@ -196,10 +197,10 @@ namespace shape_recognizer
         private void graphPanel_MouseUp(object sender, MouseEventArgs e)
         {
             mouseIsDown = false;
-            var vertices = new Vertex[points_list.Count];
-            for (int i = 0; i < points_list.Count; i++)
+            var vertices = new Vertex[pointList.Count];
+            for (int i = 0; i < pointList.Count; i++)
             {
-                vertices[i] = new Vertex(points_list[i].X, points_list[i].Y);
+                vertices[i] = new Vertex(pointList[i].X, pointList[i].Y);
             }
             List<Vertex> convexHull = ConvexHull.Create(vertices).Points.ToList();
             List<Point> convexHullPoints = VertexToPoint(convexHull);
@@ -207,26 +208,32 @@ namespace shape_recognizer
             {
                 graphObj.DrawLine(new Pen(Color.Red), convexHullPoints[i - 1], convexHullPoints[i]);
             }
-            labelShapePointCountVal.Text = points_list.Count.ToString();
+            labelShapePointCountVal.Text = pointList.Count.ToString();
             labelConvHullPntCntVal.Text = convexHullPoints.Count().ToString();
-            Rectangle boundingBox = BoundingBox(points_list);
+            Rectangle boundingBox = BoundingBox(pointList);
             graphObj.DrawRectangle(new Pen(Color.Black), boundingBox);
             List<Point> biggestTriangle = DetectMaxTriangle(convexHullPoints);
             DrawTriangle(biggestTriangle);
             double perimeter = PerimeterOfPolygon(convexHullPoints);
             labelCHPerimeterValue.Text = Math.Round(perimeter,2).ToString();
             #region relations
+            Relations relations = new Relations();
             double pch = PerimeterOfPolygon(convexHullPoints);
-            double triangleRelation = AreaTriangle(biggestTriangle[0], biggestTriangle[1], biggestTriangle[2]) /PolygonArea(convexHullPoints);
-            labelAltachValue.Text = Math.Round(triangleRelation, 5).ToString();
-            double lenPch = PerimeterOfPolygon(points_list) / pch;
-            labelLenpchValue.Text = Math.Round(lenPch, 5).ToString();
-            double pch2Arch =pch/ PolygonArea(convexHullPoints);
-            labelPchachValue.Text = Math.Round(pch2Arch, 5).ToString();
-            double pchPer = pch / (2 * (boundingBox.Width + boundingBox.Height));
-            labelPchperValue.Text = Math.Round(pchPer, 5).ToString();
+            relations.AltAch = AreaTriangle(biggestTriangle[0], biggestTriangle[1], biggestTriangle[2]) /PolygonArea(convexHullPoints);
+            labelAltachValue.Text = Math.Round(relations.AltAch, 5).ToString();
+
+            relations.LenPch = PerimeterOfPolygon(pointList) / pch;
+            labelLenpchValue.Text = Math.Round(relations.LenPch, 5).ToString();
+
+            relations.Pch2Ach =pch/ PolygonArea(convexHullPoints);
+            labelPchachValue.Text = Math.Round(relations.Pch2Ach, 5).ToString();
+
+            relations.PchPer = pch / (2 * (boundingBox.Width + boundingBox.Height));
+            labelPchperValue.Text = Math.Round(relations.PchPer, 5).ToString();
             #endregion
-            points_list.Clear();
+            polygonList.Add(new Polygon2D(pointList,relations));
+            //Clean some shits
+            pointList.Clear();
             vertices = null;
         }
 

@@ -5,19 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace shape_recognizer
 {
+    public struct Relations
+    {
+        public double LenPch;
+        public double Pch2Ach;
+        public double AltAch;
+        public double PchPer;
+        public double AchAerAlt;
+    }
     class Polygon2D
     {
-        private List<Point> _points { get; set; }
-        public struct Relations
-        {
-            private double _LenPch { get; set; }
-            private double _Pch2Ach { get; set; }
-            private double _AltAch { get; set; }
-            private double _PchPer { get; set; }
-            private double _AchAerAlt { get; set; }
-        }
+        private List<Point> _points { get; set; }       
         private Relations _relations { get; set; }
         public Polygon2D(List<Point> points, Relations relations)
         {
