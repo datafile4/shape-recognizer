@@ -17,6 +17,7 @@ namespace shape_recognizer
         bool mouseIsDown = false;
         List<Point> pointList = new List<Point>();
         List<Polygon2D> polygonList = new List<Polygon2D>();
+        Polygon2D polygonCurrent;
         Label labelLenpch;
         Label labelLenpchValue;
         Label labelPchach;
@@ -193,8 +194,8 @@ namespace shape_recognizer
             graphObj.DrawLine(new Pen(Color.Black), _lastLoc, loc);
             _lastLoc = loc;
         }
-        //this is main function now
-        private void graphPanel_MouseUp(object sender, MouseEventArgs e)
+
+        private void RecordShape()
         {
             mouseIsDown = false;
             var vertices = new Vertex[pointList.Count];
@@ -215,29 +216,29 @@ namespace shape_recognizer
             List<Point> biggestTriangle = DetectMaxTriangle(convexHullPoints);
             DrawTriangle(biggestTriangle);
             double perimeter = PerimeterOfPolygon(convexHullPoints);
-            labelCHPerimeterValue.Text = Math.Round(perimeter,2).ToString();
+            labelCHPerimeterValue.Text = Math.Round(perimeter, 2).ToString();
             #region relations
             Relations relations = new Relations();
             double pch = PerimeterOfPolygon(convexHullPoints);
-            relations.AltAch = AreaTriangle(biggestTriangle[0], biggestTriangle[1], biggestTriangle[2]) /PolygonArea(convexHullPoints);
+            relations.AltAch = AreaTriangle(biggestTriangle[0], biggestTriangle[1], biggestTriangle[2]) / PolygonArea(convexHullPoints);
             labelAltachValue.Text = Math.Round(relations.AltAch, 5).ToString();
 
             relations.LenPch = PerimeterOfPolygon(pointList) / pch;
             labelLenpchValue.Text = Math.Round(relations.LenPch, 5).ToString();
 
-            relations.Pch2Ach =pch/ PolygonArea(convexHullPoints);
+            relations.Pch2Ach = pch / PolygonArea(convexHullPoints);
             labelPchachValue.Text = Math.Round(relations.Pch2Ach, 5).ToString();
 
             relations.PchPer = pch / (2 * (boundingBox.Width + boundingBox.Height));
             labelPchperValue.Text = Math.Round(relations.PchPer, 5).ToString();
             #endregion
-            polygonList.Add(new Polygon2D(pointList,relations));
+
+            polygonList.Add(new Polygon2D(pointList, relations));
             //Clean some shits
             pointList.Clear();
             vertices = null;
         }
-
-        private void buttonClear_Click(object sender, EventArgs e)
+        public void ClearCanvas()
         {
             if (graphObj != null)
             {
@@ -248,8 +249,8 @@ namespace shape_recognizer
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {           
+        private void InitializeRelationLabels()
+        {
             labelLenpch = new Label();
             labelLenpch.Text = "Len/Pch";
             tableLayoutPanelValues.Controls.Add(labelLenpch, 0, 0);
@@ -270,6 +271,26 @@ namespace shape_recognizer
             tableLayoutPanelValues.Controls.Add(labelAltachValue, 1, 2);
             labelPchperValue = new Label();
             tableLayoutPanelValues.Controls.Add(labelPchperValue, 1, 3);
+        }
+        //this is main function now
+        private void graphPanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            RecordShape();
+        }
+
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            ClearCanvas();
+        }        
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            InitializeRelationLabels();
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

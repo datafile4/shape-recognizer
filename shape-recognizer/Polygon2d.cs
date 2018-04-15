@@ -19,10 +19,10 @@ namespace shape_recognizer
     class Polygon2D
     {
         private List<Point> _points { get; set; }       
-        private Relations _relations { get; set; }
+        //private Relations _relations { get; set; }
         public Polygon2D(List<Point> points, Relations relations)
         {
-            _relations = relations;
+            //_relations = relations;
             _points = points;
         }
     }
