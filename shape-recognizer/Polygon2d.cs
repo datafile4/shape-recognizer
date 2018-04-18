@@ -7,21 +7,17 @@ using System.Threading.Tasks;
 
 
 namespace shape_recognizer
-{
-    public struct Relations
-    {
-        public double LenPch;
-        public double Pch2Ach;
-        public double AltAch;
-        public double PchPer;
-        public double AchAerAlt;
-    }
+{    
     class Polygon2D
     {
-        private List<Point> _points { get; set; }
+        public List<Point> Points { get; private set; }
         public Polygon2D(List<Point> points)
         {
-            _points = points;
+            this.Points = points;
+        }
+
+        public Polygon2D() {
+
         }
     }
 }
