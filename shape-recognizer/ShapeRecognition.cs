@@ -7,16 +7,7 @@ using System.Drawing;
 using MIConvexHull;
 
 namespace shape_recognizer
-{
-    public struct Relations
-    {
-        public double LenPch;
-        public double Pch2Ach;
-        public double AltAch;
-        public double PchPer;
-        public double AchAerAlt;
-    }
-
+{   
     class ShapeRecognition
     {
         public Polygon2D OriginalPolygon { get; private set; }
@@ -24,6 +15,8 @@ namespace shape_recognizer
         public Rectangle BoundingRectangle { get; private set; }
         public Triangle NestedTriangle { get; private set; }
         public Relations relations { get; private set; }
+
+        public 
 
         private Rectangle BoundingBox()
         {
@@ -118,7 +111,7 @@ namespace shape_recognizer
                 area = area - polygon.Points[i].Y * polygon.Points[j].X;
             }
             return area / 2;
-        }
+        }        
         
         private double FeatureLenPch()
         {

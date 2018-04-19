@@ -6,17 +6,8 @@ using System.Threading.Tasks;
 
 namespace shape_recognizer
 {
-    public struct Relations
-    {
-        public double LenPch;
-        public double Pch2Ach;
-        public double AltAch;
-        public double PchPer;
-        public double AchAerAlt;
-    }
-
     class Database
-    {       
+    {
         public List<Polygon2D> Shapes { get; private set; }
         public List<string> Classes { get; private set; }
         public List<Relations> Features { get; private set; }
