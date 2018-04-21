@@ -14,7 +14,5 @@ namespace shape_recognizer
         public double AltAch;
         public double PchPer;
         public double AchAerAlt;
-    }
-
-    struct Classes
+    }    
 }

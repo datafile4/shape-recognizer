@@ -14,10 +14,27 @@ namespace shape_recognizer
         public Polygon2D ConvexHull { get; private set; }
         public Rectangle BoundingRectangle { get; private set; }
         public Triangle NestedTriangle { get; private set; }
-        public Relations relations { get; private set; }
+        public Relations relations { get; private set; }       
 
-        public 
+        private Relations GetRelations()
+        {
+            var vertices = new Vertex[OriginalPolygon.Points.Count];
+            for (int i = 0; i < OriginalPolygon.Points.Count; i++)
+            {
+                vertices[i] = new Vertex(OriginalPolygon.Points[i].X, OriginalPolygon.Points[i].Y);
+            }
+            ConvexHull = new Polygon2D(VertexToPoint(MIConvexHull.ConvexHull.Create(vertices).Points.ToList()));
 
+            Rectangle boundingBox = BoundingBox();
+            NestedTriangle = DetectMaxTriangle();
+            Relations relations = new Relations();
+            double perimeterCH = PerimeterOfPolygon(ConvexHull);
+            relations.AltAch = AreaTriangle(NestedTriangle) / PolygonArea(ConvexHull);
+            relations.LenPch = PerimeterOfPolygon(OriginalPolygon) / perimeterCH;
+            relations.Pch2Ach = perimeterCH / PolygonArea(ConvexHull);
+            relations.PchPer = perimeterCH / (2 * (boundingBox.Width + boundingBox.Height));
+            return relations;
+        }
         private Rectangle BoundingBox()
         {
             var x_query = from Point p in OriginalPolygon.Points select p.X;
@@ -111,7 +128,7 @@ namespace shape_recognizer
                 area = area - polygon.Points[i].Y * polygon.Points[j].X;
             }
             return area / 2;
-        }        
+        }
         
         private double FeatureLenPch()
         {
