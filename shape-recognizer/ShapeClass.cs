@@ -18,6 +18,7 @@ namespace shape_recognizer
     
     public enum ShapeClass {Rectangle, Cirle, Triangle, Line, Ellipse, Diamond };
 
+    [Serializable]
     class ClassifiedShape
     {
         //public Relations relations { get; private set; }
@@ -31,11 +32,11 @@ namespace shape_recognizer
         public ClassifiedShape(Relations relations, ShapeClass shapeClass)
         {
             // this.relations = relations;
-            LenPch = relations.LenPch;
-            Pch2Ach = relations.Pch2Ach;
-            AltAch = relations.AltAch;
-            PchPer = relations.PchPer;
-            AchAerAlt = relations.AchAerAlt;
+            LenPch = Math.Round(relations.LenPch,5);
+            Pch2Ach = Math.Round(relations.Pch2Ach, 5);
+            AltAch = Math.Round(relations.AltAch, 5);
+            PchPer = Math.Round(relations.PchPer, 5);
+            AchAerAlt = Math.Round(relations.AchAerAlt, 5);
             this.shapeClass = shapeClass;
         }
     }

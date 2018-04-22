@@ -38,21 +38,20 @@
             this.labelConvHullPntCntVal = new System.Windows.Forms.Label();
             this.labelCHPerimeter = new System.Windows.Forms.Label();
             this.labelCHPerimeterValue = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewClassifiedShape = new System.Windows.Forms.DataGridView();
             this.buttonSave = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBoxShapeClass = new System.Windows.Forms.ComboBox();
+            this.classifiedShapeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.shapeClassDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lenPchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pch2AchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.altAchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pchPerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.achAerAltDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.classifiedShapeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
-            this.comboBoxShapeClass = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.classifiedShapeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClassifiedShape)).BeginInit();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.classifiedShapeBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // graphPanel
@@ -68,11 +67,11 @@
             // 
             // buttonClear
             // 
-            this.buttonClear.Location = new System.Drawing.Point(12, 311);
+            this.buttonClear.Location = new System.Drawing.Point(131, 47);
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(75, 23);
             this.buttonClear.TabIndex = 1;
-            this.buttonClear.Text = "Clear";
+            this.buttonClear.Text = "Forget";
             this.buttonClear.UseVisualStyleBackColor = true;
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
@@ -135,26 +134,27 @@
             this.labelCHPerimeterValue.Size = new System.Drawing.Size(0, 13);
             this.labelCHPerimeterValue.TabIndex = 8;
             // 
-            // dataGridView1
+            // dataGridViewClassifiedShape
             // 
-            this.dataGridView1.AutoGenerateColumns = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewClassifiedShape.AutoGenerateColumns = false;
+            this.dataGridViewClassifiedShape.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewClassifiedShape.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.shapeClassDataGridViewTextBoxColumn,
             this.lenPchDataGridViewTextBoxColumn,
             this.pch2AchDataGridViewTextBoxColumn,
             this.altAchDataGridViewTextBoxColumn,
             this.pchPerDataGridViewTextBoxColumn,
             this.achAerAltDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.classifiedShapeBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(392, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(480, 150);
-            this.dataGridView1.TabIndex = 10;
+            this.dataGridViewClassifiedShape.DataSource = this.classifiedShapeBindingSource;
+            this.dataGridViewClassifiedShape.Location = new System.Drawing.Point(392, 12);
+            this.dataGridViewClassifiedShape.Name = "dataGridViewClassifiedShape";
+            this.dataGridViewClassifiedShape.ReadOnly = true;
+            this.dataGridViewClassifiedShape.Size = new System.Drawing.Size(480, 150);
+            this.dataGridViewClassifiedShape.TabIndex = 10;
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(94, 310);
+            this.buttonSave.Location = new System.Drawing.Point(212, 47);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 11;
@@ -162,69 +162,15 @@
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
-            // shapeClassDataGridViewTextBoxColumn
-            // 
-            this.shapeClassDataGridViewTextBoxColumn.DataPropertyName = "shapeClass";
-            this.shapeClassDataGridViewTextBoxColumn.HeaderText = "shapeClass";
-            this.shapeClassDataGridViewTextBoxColumn.Name = "shapeClassDataGridViewTextBoxColumn";
-            this.shapeClassDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // lenPchDataGridViewTextBoxColumn
-            // 
-            this.lenPchDataGridViewTextBoxColumn.DataPropertyName = "LenPch";
-            this.lenPchDataGridViewTextBoxColumn.HeaderText = "LenPch";
-            this.lenPchDataGridViewTextBoxColumn.Name = "lenPchDataGridViewTextBoxColumn";
-            this.lenPchDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // pch2AchDataGridViewTextBoxColumn
-            // 
-            this.pch2AchDataGridViewTextBoxColumn.DataPropertyName = "Pch2Ach";
-            this.pch2AchDataGridViewTextBoxColumn.HeaderText = "Pch2Ach";
-            this.pch2AchDataGridViewTextBoxColumn.Name = "pch2AchDataGridViewTextBoxColumn";
-            this.pch2AchDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // altAchDataGridViewTextBoxColumn
-            // 
-            this.altAchDataGridViewTextBoxColumn.DataPropertyName = "AltAch";
-            this.altAchDataGridViewTextBoxColumn.HeaderText = "AltAch";
-            this.altAchDataGridViewTextBoxColumn.Name = "altAchDataGridViewTextBoxColumn";
-            this.altAchDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // pchPerDataGridViewTextBoxColumn
-            // 
-            this.pchPerDataGridViewTextBoxColumn.DataPropertyName = "PchPer";
-            this.pchPerDataGridViewTextBoxColumn.HeaderText = "PchPer";
-            this.pchPerDataGridViewTextBoxColumn.Name = "pchPerDataGridViewTextBoxColumn";
-            this.pchPerDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // achAerAltDataGridViewTextBoxColumn
-            // 
-            this.achAerAltDataGridViewTextBoxColumn.DataPropertyName = "AchAerAlt";
-            this.achAerAltDataGridViewTextBoxColumn.HeaderText = "AchAerAlt";
-            this.achAerAltDataGridViewTextBoxColumn.Name = "achAerAltDataGridViewTextBoxColumn";
-            this.achAerAltDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // classifiedShapeBindingSource
-            // 
-            this.classifiedShapeBindingSource.DataSource = typeof(shape_recognizer.ClassifiedShape);
-            // 
             // panel1
             // 
             this.panel1.Controls.Add(this.comboBoxShapeClass);
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.buttonSave);
+            this.panel1.Controls.Add(this.buttonClear);
             this.panel1.Location = new System.Drawing.Point(392, 169);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(480, 100);
             this.panel1.TabIndex = 12;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(167, 47);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // comboBoxShapeClass
             // 
@@ -234,14 +180,71 @@
             this.comboBoxShapeClass.Size = new System.Drawing.Size(121, 21);
             this.comboBoxShapeClass.TabIndex = 1;
             // 
+            // classifiedShapeBindingSource
+            // 
+            this.classifiedShapeBindingSource.DataSource = typeof(shape_recognizer.ClassifiedShape);
+            // 
+            // shapeClassDataGridViewTextBoxColumn
+            // 
+            this.shapeClassDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.shapeClassDataGridViewTextBoxColumn.DataPropertyName = "shapeClass";
+            this.shapeClassDataGridViewTextBoxColumn.HeaderText = "shapeClass";
+            this.shapeClassDataGridViewTextBoxColumn.Name = "shapeClassDataGridViewTextBoxColumn";
+            this.shapeClassDataGridViewTextBoxColumn.ReadOnly = true;
+            this.shapeClassDataGridViewTextBoxColumn.Width = 86;
+            // 
+            // lenPchDataGridViewTextBoxColumn
+            // 
+            this.lenPchDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.lenPchDataGridViewTextBoxColumn.DataPropertyName = "LenPch";
+            this.lenPchDataGridViewTextBoxColumn.HeaderText = "LenPch";
+            this.lenPchDataGridViewTextBoxColumn.Name = "lenPchDataGridViewTextBoxColumn";
+            this.lenPchDataGridViewTextBoxColumn.ReadOnly = true;
+            this.lenPchDataGridViewTextBoxColumn.Width = 69;
+            // 
+            // pch2AchDataGridViewTextBoxColumn
+            // 
+            this.pch2AchDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.pch2AchDataGridViewTextBoxColumn.DataPropertyName = "Pch2Ach";
+            this.pch2AchDataGridViewTextBoxColumn.HeaderText = "Pch2Ach";
+            this.pch2AchDataGridViewTextBoxColumn.Name = "pch2AchDataGridViewTextBoxColumn";
+            this.pch2AchDataGridViewTextBoxColumn.ReadOnly = true;
+            this.pch2AchDataGridViewTextBoxColumn.Width = 76;
+            // 
+            // altAchDataGridViewTextBoxColumn
+            // 
+            this.altAchDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.altAchDataGridViewTextBoxColumn.DataPropertyName = "AltAch";
+            this.altAchDataGridViewTextBoxColumn.HeaderText = "AltAch";
+            this.altAchDataGridViewTextBoxColumn.Name = "altAchDataGridViewTextBoxColumn";
+            this.altAchDataGridViewTextBoxColumn.ReadOnly = true;
+            this.altAchDataGridViewTextBoxColumn.Width = 63;
+            // 
+            // pchPerDataGridViewTextBoxColumn
+            // 
+            this.pchPerDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.pchPerDataGridViewTextBoxColumn.DataPropertyName = "PchPer";
+            this.pchPerDataGridViewTextBoxColumn.HeaderText = "PchPer";
+            this.pchPerDataGridViewTextBoxColumn.Name = "pchPerDataGridViewTextBoxColumn";
+            this.pchPerDataGridViewTextBoxColumn.ReadOnly = true;
+            this.pchPerDataGridViewTextBoxColumn.Width = 67;
+            // 
+            // achAerAltDataGridViewTextBoxColumn
+            // 
+            this.achAerAltDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.achAerAltDataGridViewTextBoxColumn.DataPropertyName = "AchAerAlt";
+            this.achAerAltDataGridViewTextBoxColumn.HeaderText = "AchAerAlt";
+            this.achAerAltDataGridViewTextBoxColumn.Name = "achAerAltDataGridViewTextBoxColumn";
+            this.achAerAltDataGridViewTextBoxColumn.ReadOnly = true;
+            this.achAerAltDataGridViewTextBoxColumn.Width = 79;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 401);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.buttonSave);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridViewClassifiedShape);
             this.Controls.Add(this.labelCHPerimeterValue);
             this.Controls.Add(this.labelCHPerimeter);
             this.Controls.Add(this.labelConvHullPntCntVal);
@@ -249,7 +252,6 @@
             this.Controls.Add(this.labelShapePointCountVal);
             this.Controls.Add(this.labelShapePointCount);
             this.Controls.Add(this.labelPoint);
-            this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.graphPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -258,9 +260,9 @@
             this.Name = "Form1";
             this.Text = "Shape Recognizer";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.classifiedShapeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClassifiedShape)).EndInit();
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.classifiedShapeBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -277,18 +279,17 @@
         private System.Windows.Forms.Label labelConvHullPntCntVal;
         private System.Windows.Forms.Label labelCHPerimeter;
         private System.Windows.Forms.Label labelCHPerimeterValue;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewClassifiedShape;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.BindingSource classifiedShapeBindingSource;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ComboBox comboBoxShapeClass;
         private System.Windows.Forms.DataGridViewTextBoxColumn shapeClassDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn lenPchDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn pch2AchDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn altAchDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn pchPerDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn achAerAltDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource classifiedShapeBindingSource;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ComboBox comboBoxShapeClass;
-        private System.Windows.Forms.Button button1;
     }
 }
 

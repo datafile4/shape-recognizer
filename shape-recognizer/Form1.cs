@@ -16,7 +16,8 @@ namespace shape_recognizer
         private Point _lastLoc;
         bool mouseIsDown = false;
         List<Point> pointList = new List<Point>();
-        List<Polygon2D> polygonList = new List<Polygon2D>();        
+        Relations currentRelation;
+        BindingSource dataGridViewBindingSource = new BindingSource();
 
         public Form1()
         {
@@ -79,7 +80,7 @@ namespace shape_recognizer
             labelConvHullPntCntVal.Text = convexHullPoints.Count().ToString();
             graphObj.DrawRectangle(new Pen(Color.Black), recognizer.BoundingRectangle);
             DrawTriangle(recognizer.NestedTriangle);
-            Relations relations = recognizer.GetRelations();
+            currentRelation = recognizer.GetRelations();                        
             //Clean some shits
             pointList.Clear();
         }
@@ -106,11 +107,14 @@ namespace shape_recognizer
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-
+            ShapeClass selectedClassItem = (ShapeClass)comboBoxShapeClass.SelectedItem;
+            ClassifiedShape classifiedShape = new ClassifiedShape(currentRelation, selectedClassItem);
+            classifiedShapeBindingSource.Add(classifiedShape);
         }
     }
 }
