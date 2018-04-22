@@ -27,11 +27,15 @@ namespace shape_recognizer
         public Relations GetRelations()
         {
             Relations relations = new Relations();
+            double areaCH = PolygonArea(ConvexHull);
             double perimeterCH = PerimeterOfPolygon(ConvexHull);
-            relations.AltAch = AreaTriangle(NestedTriangle) / PolygonArea(ConvexHull);
+            double areaRectangle = BoundingRectangle.Width * BoundingRectangle.Height;
+            double areaTriangle = AreaTriangle(NestedTriangle);
+            relations.AltAch = areaTriangle / areaCH;
             relations.LenPch = PerimeterOfPolygon(OriginalPolygon) / perimeterCH;
-            relations.Pch2Ach = perimeterCH / PolygonArea(ConvexHull);
+            relations.Pch2Ach = perimeterCH / areaCH;
             relations.PchPer = perimeterCH / (2 * (BoundingRectangle.Width + BoundingRectangle.Height));
+            relations.AchAerAlt = Math.Pow(areaCH, 2) / (areaRectangle * areaTriangle);
             return relations;
         }
         private Rectangle BoundingBox()

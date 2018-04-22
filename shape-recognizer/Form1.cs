@@ -115,6 +115,13 @@ namespace shape_recognizer
             ShapeClass selectedClassItem = (ShapeClass)comboBoxShapeClass.SelectedItem;
             ClassifiedShape classifiedShape = new ClassifiedShape(currentRelation, selectedClassItem);
             classifiedShapeBindingSource.Add(classifiedShape);
+            ClearCanvas();
+        }
+
+        private void buttonDataGridClear_Click(object sender, EventArgs e)
+        {
+            dataGridViewClassifiedShape.Rows.Clear();
+            dataGridViewClassifiedShape.Refresh();
         }
     }
 }
