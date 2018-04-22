@@ -17,7 +17,6 @@ namespace shape_recognizer
         bool mouseIsDown = false;
         List<Point> pointList = new List<Point>();
         List<Polygon2D> polygonList = new List<Polygon2D>();
-        Polygon2D polygonCurrent;
         Label labelLenpch;
         Label labelLenpchValue;
         Label labelPchach;
@@ -32,143 +31,21 @@ namespace shape_recognizer
             InitializeComponent();
         }
 
-        private Rectangle BoundingBox(List<Point> points)
+        private void DrawTriangle(Triangle triangle)
         {
-            var x_query = from Point p in points select p.X;
-            int xmin = x_query.Min();
-            int xmax = x_query.Max();
-
-            var y_query = from Point p in points select p.Y;
-            int ymin = y_query.Min();
-            int ymax = y_query.Max();
-
-            return new Rectangle(xmin, ymin, xmax - xmin, ymax - ymin);
-        }
-
-        //private Point Centroid(IEnumerable<Vertex> convexHull)
-        //{
-        //    //from https://en.wikipedia.org/wiki/Centroid#Centroid_of_a_polygon
-        //    double polygonArea = 0;
-        //    for (int i = 0; i < convexHull.Count() - 1; i++)
-        //    {
-        //        polygonArea += convexHull.ElementAt(i).Position[0] * convexHull.ElementAt(i + 1).Position[1] -
-        //            convexHull.ElementAt(i + 1).Position[0] * convexHull.ElementAt(i).Position[1];
-        //    }
-        //    polygonArea /= 2;
-
-        //    Point center = new Point();
-        //    for (int i = 0; i < convexHull.Count() - 1; i++)
-        //    {
-        //        center.X += (int)((convexHull.ElementAt(i).Position[0] + convexHull.ElementAt(i + 1).Position[0]) *
-        //            (convexHull.ElementAt(i).Position[0] * convexHull.ElementAt(i + 1).Position[1] -
-        //            convexHull.ElementAt(i + 1).Position[0] * convexHull.ElementAt(i).Position[1]));
-        //    }
-        //    center.X /= 6 * (int)polygonArea;
-
-        //    for (int i = 0; i < convexHull.Count() - 1; i++)
-        //    {
-        //        center.Y += (int)((convexHull.ElementAt(i).Position[1] + convexHull.ElementAt(i + 1).Position[1]) *
-        //            (convexHull.ElementAt(i).Position[0] * convexHull.ElementAt(i + 1).Position[1] -
-        //            convexHull.ElementAt(i + 1).Position[0] * convexHull.ElementAt(i).Position[1]));
-        //    }
-        //    center.Y /= 6 * (int)polygonArea;
-
-        //    return center;
-        //}
-
-        private double AreaTriangle(Point a, Point b, Point c) => Math.Abs((a.X - c.X) * (b.Y - a.Y) - (a.X - b.X) * (c.Y - a.Y));
-        private List<Point> DetectMaxTriangle(List<Point> _convexHull)
-        {
-            int A = 0, B = 1, C = 2;
-            int bA = A, bB = B, bC = C; //best triple
-            int n = _convexHull.Count();
-            while (true)
-            {
-                while (true)
-                {
-                    while (AreaTriangle(_convexHull[A], _convexHull[B], _convexHull[C]) <= AreaTriangle(_convexHull[A], _convexHull[B], _convexHull[(C + 1) % n]))
-                    {
-                        C = (C + 1) % n;
-                    }
-                    if (AreaTriangle(_convexHull[A], _convexHull[B], _convexHull[C]) <= AreaTriangle(_convexHull[A], _convexHull[(B + 1) % n], _convexHull[C]))
-                    {
-                        B = (B + 1) % n;
-                        continue;
-                    }
-                    else
-                        break;
-                }
-                if (AreaTriangle(_convexHull[A], _convexHull[B], _convexHull[C]) > AreaTriangle(_convexHull[bA], _convexHull[bB], _convexHull[bC]))
-                {
-                    bA = A;
-                    bB = B;
-                    bC = C;
-                }
-
-                A = (A + 1) % n;
-                if (A == B)
-                    B = (B + 1) % n;
-                if (B == C)
-                    C = (C + 1) % n;
-                if (A == 0)
-                    break;
-            }
-            List<Point> result = new List<Point>() { _convexHull[bA], _convexHull[bB], _convexHull[bC] };
-            return result;
-        }
-
-        private void DrawTriangle(List<Point> points)
-        {
-            if (graphObj != null || points.Count  <= 3)
+            if (graphObj != null)
             {
                 var pen = new Pen(Color.Green);
-                graphObj.DrawLine(pen, points[0], points[1]);
-                graphObj.DrawLine(pen, points[1], points[2]);
-                graphObj.DrawLine(pen, points[2], points[0]);
-            } else
+                graphObj.DrawLine(pen, triangle.A, triangle.B);
+                graphObj.DrawLine(pen, triangle.B, triangle.C);
+                graphObj.DrawLine(pen, triangle.C, triangle.A);
+            }
+            else
             {
                 throw new Exception("Graph is null");
             }
         }
 
-        private List<Point> VertexToPoint(List<Vertex> vertices)
-        {
-            List<Point> points = new List<Point>();
-            foreach (Vertex _vertex in vertices)
-            {
-                points.Add(new Point((int)_vertex.Position[0], (int)_vertex.Position[1]));
-            }
-            return points;
-        }
-
-        #region parameters for relations
-        private double PerimeterOfPolygon(List<Point> polygon)
-        {
-            //perimeter of free shape will be sum of distances between all points
-            double perimeter = 0;
-            for (int i = 1; i < polygon.Count; i++)
-            {
-                //distance between two points
-                perimeter += Math.Sqrt(Math.Pow(polygon[i].X - polygon[i - 1].X, 2) + Math.Pow(polygon[i].Y - polygon[i - 1].Y, 2));
-            }
-            //distance between last point and first point
-            perimeter += Math.Sqrt(Math.Pow(polygon.Last().X - polygon.First().X, 2) + Math.Pow(polygon.Last().Y - polygon.First().Y, 2));
-            return perimeter;
-        }
-        //https://web.archive.org/web/20100405070507/http://valis.cs.uiuc.edu/~sariel/research/CG/compgeom/msg00831.html
-        //http://www.mathopenref.com/coordpolygonarea.html
-        double PolygonArea(List<Point> polygon)
-        {
-            double area = 0;
-            for(int i = 0; i<polygon.Count; i++)
-            {
-                int j = (i+1)% polygon.Count;
-                area = area + polygon[i].X * polygon[j].Y;
-                area = area - polygon[i].Y * polygon[j].X;
-            }
-            return area/2;
-        }
-        #endregion        
         private void graphPanel_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -198,45 +75,24 @@ namespace shape_recognizer
         private void RecordShape()
         {
             mouseIsDown = false;
-            var vertices = new Vertex[pointList.Count];
-            for (int i = 0; i < pointList.Count; i++)
-            {
-                vertices[i] = new Vertex(pointList[i].X, pointList[i].Y);
-            }
-            List<Vertex> convexHull = ConvexHull.Create(vertices).Points.ToList();
-            List<Point> convexHullPoints = VertexToPoint(convexHull);
+            ShapeRecognition recognizer = new ShapeRecognition(new Polygon2D(pointList));
+            Polygon2D convexHull = recognizer.ConvexHull;
+            List<Point> convexHullPoints = convexHull.Points;
             for (int i = 1; i < convexHullPoints.Count(); i++)
             {
                 graphObj.DrawLine(new Pen(Color.Red), convexHullPoints[i - 1], convexHullPoints[i]);
             }
             labelShapePointCountVal.Text = pointList.Count.ToString();
             labelConvHullPntCntVal.Text = convexHullPoints.Count().ToString();
-            Rectangle boundingBox = BoundingBox(pointList);
-            graphObj.DrawRectangle(new Pen(Color.Black), boundingBox);
-            List<Point> biggestTriangle = DetectMaxTriangle(convexHullPoints);
-            DrawTriangle(biggestTriangle);
-            double perimeter = PerimeterOfPolygon(convexHullPoints);
-            labelCHPerimeterValue.Text = Math.Round(perimeter, 2).ToString();
-            #region relations
-            Relations relations = new Relations();
-            double pch = PerimeterOfPolygon(convexHullPoints);
-            relations.AltAch = AreaTriangle(biggestTriangle[0], biggestTriangle[1], biggestTriangle[2]) / PolygonArea(convexHullPoints);
+            graphObj.DrawRectangle(new Pen(Color.Black), recognizer.BoundingRectangle);
+            DrawTriangle(recognizer.NestedTriangle);
+            Relations relations = recognizer.GetRelations();
             labelAltachValue.Text = Math.Round(relations.AltAch, 5).ToString();
-
-            relations.LenPch = PerimeterOfPolygon(pointList) / pch;
             labelLenpchValue.Text = Math.Round(relations.LenPch, 5).ToString();
-
-            relations.Pch2Ach = pch / PolygonArea(convexHullPoints);
             labelPchachValue.Text = Math.Round(relations.Pch2Ach, 5).ToString();
-
-            relations.PchPer = pch / (2 * (boundingBox.Width + boundingBox.Height));
             labelPchperValue.Text = Math.Round(relations.PchPer, 5).ToString();
-            #endregion
-
-            polygonList.Add(new Polygon2D(pointList, relations));
             //Clean some shits
             pointList.Clear();
-            vertices = null;
         }
         public void ClearCanvas()
         {
@@ -281,7 +137,7 @@ namespace shape_recognizer
         private void buttonClear_Click(object sender, EventArgs e)
         {
             ClearCanvas();
-        }        
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {

@@ -7,32 +7,31 @@ using System.Drawing;
 using MIConvexHull;
 
 namespace shape_recognizer
-{   
+{
     class ShapeRecognition
     {
         public Polygon2D OriginalPolygon { get; private set; }
         public Polygon2D ConvexHull { get; private set; }
         public Rectangle BoundingRectangle { get; private set; }
         public Triangle NestedTriangle { get; private set; }
-        public Relations relations { get; private set; }       
+        public Relations relations { get; private set; }
 
-        private Relations GetRelations()
+        public ShapeRecognition(Polygon2D OriginalPolygon)
         {
-            var vertices = new Vertex[OriginalPolygon.Points.Count];
-            for (int i = 0; i < OriginalPolygon.Points.Count; i++)
-            {
-                vertices[i] = new Vertex(OriginalPolygon.Points[i].X, OriginalPolygon.Points[i].Y);
-            }
-            ConvexHull = new Polygon2D(VertexToPoint(MIConvexHull.ConvexHull.Create(vertices).Points.ToList()));
-
-            Rectangle boundingBox = BoundingBox();
+            this.OriginalPolygon = OriginalPolygon;
+            ConvexHull = GetConvexHull();
+            BoundingRectangle = BoundingBox();
             NestedTriangle = DetectMaxTriangle();
+        }
+
+        public Relations GetRelations()
+        {
             Relations relations = new Relations();
             double perimeterCH = PerimeterOfPolygon(ConvexHull);
             relations.AltAch = AreaTriangle(NestedTriangle) / PolygonArea(ConvexHull);
             relations.LenPch = PerimeterOfPolygon(OriginalPolygon) / perimeterCH;
             relations.Pch2Ach = perimeterCH / PolygonArea(ConvexHull);
-            relations.PchPer = perimeterCH / (2 * (boundingBox.Width + boundingBox.Height));
+            relations.PchPer = perimeterCH / (2 * (BoundingRectangle.Width + BoundingRectangle.Height));
             return relations;
         }
         private Rectangle BoundingBox()
@@ -59,7 +58,7 @@ namespace shape_recognizer
         }
         private double AreaTriangle(Triangle triangle)
         {
-            return Math.Abs((triangle.A.X - triangle.C.X) * (triangle.B.Y - triangle.A.Y) - 
+            return Math.Abs((triangle.A.X - triangle.C.X) * (triangle.B.Y - triangle.A.Y) -
                 (triangle.A.X - triangle.B.X) * (triangle.C.Y - triangle.A.Y));
         }
 
@@ -118,6 +117,18 @@ namespace shape_recognizer
             return perimeter;
         }
 
+        public Polygon2D GetConvexHull()
+        {
+            var vertices = new Vertex[OriginalPolygon.Points.Count];
+            for (int i = 0; i < OriginalPolygon.Points.Count; i++)
+            {
+                vertices[i] = new Vertex(OriginalPolygon.Points[i].X, OriginalPolygon.Points[i].Y);
+            }
+            return new Polygon2D(VertexToPoint(MIConvexHull.ConvexHull.Create(vertices).Points.ToList()));
+        }
+
+        //https://web.archive.org/web/20100405070507/http://valis.cs.uiuc.edu/~sariel/research/CG/compgeom/msg00831.html
+        //http://www.mathopenref.com/coordpolygonarea.html
         private double PolygonArea(Polygon2D polygon)
         {
             double area = 0;
@@ -129,7 +140,7 @@ namespace shape_recognizer
             }
             return area / 2;
         }
-        
+
         private double FeatureLenPch()
         {
             return PerimeterOfPolygon(OriginalPolygon) / PerimeterOfPolygon(ConvexHull);

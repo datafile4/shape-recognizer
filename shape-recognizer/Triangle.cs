@@ -23,7 +23,7 @@ namespace shape_recognizer
         {
             this.A = A;
             this.B = B;
-            this.B = B;
+            this.C = C;
         }
     }
 }
