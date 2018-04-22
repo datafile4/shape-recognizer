@@ -16,19 +16,12 @@ namespace shape_recognizer
         private Point _lastLoc;
         bool mouseIsDown = false;
         List<Point> pointList = new List<Point>();
-        List<Polygon2D> polygonList = new List<Polygon2D>();
-        Label labelLenpch;
-        Label labelLenpchValue;
-        Label labelPchach;
-        Label labelPchachValue;
-        Label labelAltach;
-        Label labelAltachValue;
-        Label labelPchper;
-        Label labelPchperValue;
+        List<Polygon2D> polygonList = new List<Polygon2D>();        
 
         public Form1()
         {
             InitializeComponent();
+            comboBoxShapeClass.DataSource = Enum.GetValues(typeof(ShapeClass));
         }
 
         private void DrawTriangle(Triangle triangle)
@@ -87,10 +80,6 @@ namespace shape_recognizer
             graphObj.DrawRectangle(new Pen(Color.Black), recognizer.BoundingRectangle);
             DrawTriangle(recognizer.NestedTriangle);
             Relations relations = recognizer.GetRelations();
-            labelAltachValue.Text = Math.Round(relations.AltAch, 5).ToString();
-            labelLenpchValue.Text = Math.Round(relations.LenPch, 5).ToString();
-            labelPchachValue.Text = Math.Round(relations.Pch2Ach, 5).ToString();
-            labelPchperValue.Text = Math.Round(relations.PchPer, 5).ToString();
             //Clean some shits
             pointList.Clear();
         }
@@ -103,30 +92,6 @@ namespace shape_recognizer
                 labelShapePointCountVal.Text = "";
                 labelCHPerimeterValue.Text = "";
             }
-        }
-
-        private void InitializeRelationLabels()
-        {
-            labelLenpch = new Label();
-            labelLenpch.Text = "Len/Pch";
-            tableLayoutPanelValues.Controls.Add(labelLenpch, 0, 0);
-            labelPchach = new Label();
-            labelPchach.Text = "Pch^2/Ach";
-            tableLayoutPanelValues.Controls.Add(labelPchach, 0, 1);
-            labelAltach = new Label();
-            labelAltach.Text = "Alt/Ach";
-            tableLayoutPanelValues.Controls.Add(labelAltach, 0, 2);
-            labelPchper = new Label();
-            labelPchper.Text = "Pch/Per";
-            tableLayoutPanelValues.Controls.Add(labelPchper, 0, 3);
-            labelLenpchValue = new Label();
-            tableLayoutPanelValues.Controls.Add(labelLenpchValue, 1, 0);
-            labelPchachValue = new Label();
-            tableLayoutPanelValues.Controls.Add(labelPchachValue, 1, 1);
-            labelAltachValue = new Label();
-            tableLayoutPanelValues.Controls.Add(labelAltachValue, 1, 2);
-            labelPchperValue = new Label();
-            tableLayoutPanelValues.Controls.Add(labelPchperValue, 1, 3);
         }
         //this is main function now
         private void graphPanel_MouseUp(object sender, MouseEventArgs e)
@@ -141,7 +106,6 @@ namespace shape_recognizer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            InitializeRelationLabels();
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
