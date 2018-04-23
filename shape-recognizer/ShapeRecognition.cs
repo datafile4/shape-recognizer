@@ -14,7 +14,7 @@ namespace shape_recognizer
         public Polygon2D ConvexHull { get; private set; }
         public Rectangle BoundingRectangle { get; private set; }
         public Triangle NestedTriangle { get; private set; }
-        public Relations relations { get; private set; }
+        public Relations Relations { get; private set; }
 
         public ShapeRecognition(Polygon2D OriginalPolygon)
         {
@@ -38,6 +38,7 @@ namespace shape_recognizer
             relations.AchAerAlt = Math.Pow(areaCH, 2) / (areaRectangle * areaTriangle);
             return relations;
         }
+
         private Rectangle BoundingBox()
         {
             var x_query = from Point p in OriginalPolygon.Points select p.X;

@@ -43,13 +43,13 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBoxShapeClass = new System.Windows.Forms.ComboBox();
             this.buttonDataGridClear = new System.Windows.Forms.Button();
-            this.classifiedShapeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.shapeClassDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lenPchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pch2AchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.altAchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pchPerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.achAerAltDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.classifiedShapeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClassifiedShape)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.classifiedShapeBindingSource)).BeginInit();
@@ -165,6 +165,8 @@
             // 
             // panel1
             // 
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.comboBoxShapeClass);
             this.panel1.Controls.Add(this.buttonSave);
             this.panel1.Controls.Add(this.buttonClear);
@@ -190,10 +192,6 @@
             this.buttonDataGridClear.Text = "Clear";
             this.buttonDataGridClear.UseVisualStyleBackColor = true;
             this.buttonDataGridClear.Click += new System.EventHandler(this.buttonDataGridClear_Click);
-            // 
-            // classifiedShapeBindingSource
-            // 
-            this.classifiedShapeBindingSource.DataSource = typeof(shape_recognizer.ClassifiedShape);
             // 
             // shapeClassDataGridViewTextBoxColumn
             // 
@@ -248,11 +246,15 @@
             this.achAerAltDataGridViewTextBoxColumn.Name = "achAerAltDataGridViewTextBoxColumn";
             this.achAerAltDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // classifiedShapeBindingSource
+            // 
+            this.classifiedShapeBindingSource.DataSource = typeof(shape_recognizer.ClassifiedShape);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 401);
+            this.ClientSize = new System.Drawing.Size(884, 402);
             this.Controls.Add(this.buttonDataGridClear);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridViewClassifiedShape);
