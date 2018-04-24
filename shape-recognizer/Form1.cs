@@ -123,6 +123,15 @@ namespace shape_recognizer
             dataGridViewClassifiedShape.Rows.Clear();
             dataGridViewClassifiedShape.Refresh();
         }
+
+        private void buttonLoadImage_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if(openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox1.ImageLocation = openFileDialog.FileName;
+            }
+        }
     }
 }
 
