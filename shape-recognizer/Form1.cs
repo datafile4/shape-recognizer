@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MIConvexHull;
+using AForge.Imaging;
+
 namespace shape_recognizer
 {
     public partial class Form1 : Form
@@ -33,6 +35,21 @@ namespace shape_recognizer
                 graphObj.DrawLine(pen, triangle.A, triangle.B);
                 graphObj.DrawLine(pen, triangle.B, triangle.C);
                 graphObj.DrawLine(pen, triangle.C, triangle.A);
+            }
+            else
+            {
+                throw new Exception("Graph is null");
+            }
+        }
+
+        private void DrawTriangle(Graphics graphics, Triangle triangle)
+        {
+            if (graphics != null)
+            {
+                var pen = new Pen(Color.Green);
+                graphics.DrawLine(pen, triangle.A, triangle.B);
+                graphics.DrawLine(pen, triangle.B, triangle.C);
+                graphics.DrawLine(pen, triangle.C, triangle.A);
             }
             else
             {
@@ -112,10 +129,38 @@ namespace shape_recognizer
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            ShapeClass selectedClassItem = (ShapeClass)comboBoxShapeClass.SelectedItem;
-            ClassifiedShape classifiedShape = new ClassifiedShape(currentRelation, selectedClassItem);
-            classifiedShapeBindingSource.Add(classifiedShape);
-            ClearCanvas();
+            switch (tabControl1.SelectedIndex)
+            {
+                case 0:
+                    ShapeClass selectedClassItem = (ShapeClass)comboBoxShapeClass.SelectedItem;
+                    ClassifiedShape classifiedShape = new ClassifiedShape(currentRelation, selectedClassItem);
+                    classifiedShapeBindingSource.Add(classifiedShape);
+                    ClearCanvas();
+                    break;
+                case 1:
+                    ImageHandler imageHandler = new ImageHandler(new Bitmap(pictureBox1.Image));
+                    // pictureBox1.Image = imageHandler.GetEdge();
+                    List<List<Point>> edges = imageHandler.GetEdges();
+                    Bitmap tempDraw = new Bitmap(pictureBox1.Image);
+                    Graphics graphics = Graphics.FromImage(tempDraw);
+                    foreach(List<Point> edge in edges)
+                    {
+                        List<Point> desu = edge.OrderBy(x => Math.Atan2(x.X, x.Y)).ToList();
+                        ShapeRecognition recognizer = new ShapeRecognition(new Polygon2D(desu));
+                        Polygon2D convexHull = recognizer.ConvexHull;
+                        List<Point> convexHullPoints = convexHull.Points;
+                        for (int i = 1; i < convexHullPoints.Count(); i++)
+                        {
+                            graphics.DrawLine(new Pen(Color.Red), convexHullPoints[i - 1], convexHullPoints[i]);
+                        }
+                        labelShapePointCountVal.Text = pointList.Count.ToString();
+                        labelConvHullPntCntVal.Text = convexHullPoints.Count().ToString();
+                        graphics.DrawRectangle(new Pen(Color.Blue), recognizer.BoundingRectangle);
+                        DrawTriangle(graphics, recognizer.NestedTriangle);
+                    }
+                    pictureBox1.Image = tempDraw;
+                    break;
+            }           
         }
 
         private void buttonDataGridClear_Click(object sender, EventArgs e)
