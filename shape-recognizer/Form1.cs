@@ -97,7 +97,7 @@ namespace shape_recognizer
             labelConvHullPntCntVal.Text = convexHullPoints.Count().ToString();
             graphObj.DrawRectangle(new Pen(Color.Black), recognizer.BoundingRectangle);
             DrawTriangle(recognizer.NestedTriangle);
-            currentRelation = recognizer.GetRelations();                        
+            currentRelation = recognizer.GetRelations();
             //Clean some shits
             pointList.Clear();
         }
@@ -131,10 +131,7 @@ namespace shape_recognizer
         {
             switch (tabControl1.SelectedIndex)
             {
-                case 0:
-                    ShapeClass selectedClassItem = (ShapeClass)comboBoxShapeClass.SelectedItem;
-                    ClassifiedShape classifiedShape = new ClassifiedShape(currentRelation, selectedClassItem);
-                    classifiedShapeBindingSource.Add(classifiedShape);
+                case 0:                   
                     ClearCanvas();
                     break;
                 case 1:
@@ -157,10 +154,14 @@ namespace shape_recognizer
                         labelConvHullPntCntVal.Text = convexHullPoints.Count().ToString();
                         graphics.DrawRectangle(new Pen(Color.Blue), recognizer.BoundingRectangle);
                         DrawTriangle(graphics, recognizer.NestedTriangle);
+                        currentRelation = recognizer.GetRelations();
                     }
                     pictureBox1.Image = tempDraw;
                     break;
-            }           
+            }
+            ShapeClass selectedClassItem = (ShapeClass)comboBoxShapeClass.SelectedItem;
+            ClassifiedShape classifiedShape = new ClassifiedShape(currentRelation, selectedClassItem);
+            classifiedShapeBindingSource.Add(classifiedShape);
         }
 
         private void buttonDataGridClear_Click(object sender, EventArgs e)
