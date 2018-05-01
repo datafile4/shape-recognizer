@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace shape_recognizer
         private Point _lastLoc;
         bool mouseIsDown = false;
         List<Point> pointList = new List<Point>();
+        List<Point> previousPointList = new List<Point>();
         Relations currentRelation;
         BindingSource dataGridViewBindingSource = new BindingSource();
 
@@ -99,6 +101,7 @@ namespace shape_recognizer
             DrawTriangle(recognizer.NestedTriangle);
             currentRelation = recognizer.GetRelations();
             //Clean some shits
+            previousPointList = pointList.ToList();
             pointList.Clear();
         }
         public void ClearCanvas()
@@ -177,6 +180,16 @@ namespace shape_recognizer
             {
                 pictureBox1.ImageLocation = openFileDialog.FileName;
             }
+        }
+
+        private void buttonSavePolygon_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap = new Bitmap(300,300);
+            using(Graphics graphics = Graphics.FromImage(bitmap))
+            {
+                graphics.DrawLines(new Pen(Color.White), previousPointList.ToArray());
+            }
+            bitmap.Save(@"C:\Users\datafile4\Desktop\samples\graphics.bmp",ImageFormat.Bmp);
         }
     }
 }

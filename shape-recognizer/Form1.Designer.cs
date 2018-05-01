@@ -46,8 +46,8 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonLoadImage = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialogImage = new System.Windows.Forms.OpenFileDialog();
             this.shapeClassDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lenPchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,6 +56,7 @@
             this.pchPerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.achAerAltDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.classifiedShapeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.buttonSavePolygon = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClassifiedShape)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -215,6 +216,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.buttonSavePolygon);
             this.tabPage1.Controls.Add(this.graphPanel);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
@@ -236,14 +238,6 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(7, 7);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(300, 300);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
             // buttonLoadImage
             // 
             this.buttonLoadImage.Location = new System.Drawing.Point(120, 313);
@@ -253,6 +247,14 @@
             this.buttonLoadImage.Text = "Load Image";
             this.buttonLoadImage.UseVisualStyleBackColor = true;
             this.buttonLoadImage.Click += new System.EventHandler(this.buttonLoadImage_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(7, 7);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(300, 300);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // openFileDialogImage
             // 
@@ -316,6 +318,16 @@
             // classifiedShapeBindingSource
             // 
             this.classifiedShapeBindingSource.DataSource = typeof(shape_recognizer.ClassifiedShape);
+            // 
+            // buttonSavePolygon
+            // 
+            this.buttonSavePolygon.Location = new System.Drawing.Point(108, 312);
+            this.buttonSavePolygon.Name = "buttonSavePolygon";
+            this.buttonSavePolygon.Size = new System.Drawing.Size(75, 23);
+            this.buttonSavePolygon.TabIndex = 0;
+            this.buttonSavePolygon.Text = "Save";
+            this.buttonSavePolygon.UseVisualStyleBackColor = true;
+            this.buttonSavePolygon.Click += new System.EventHandler(this.buttonSavePolygon_Click);
             // 
             // Form1
             // 
@@ -381,6 +393,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button buttonLoadImage;
         private System.Windows.Forms.OpenFileDialog openFileDialogImage;
+        private System.Windows.Forms.Button buttonSavePolygon;
     }
 }
 

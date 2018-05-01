@@ -83,6 +83,7 @@
     <Compile Include="Polygon2D.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serializer.cs" />
     <Compile Include="ShapeClass.cs" />
     <Compile Include="ShapeRecognition.cs" />
     <Compile Include="Triangle.cs" />
