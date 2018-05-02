@@ -9,7 +9,7 @@ using System.IO;
 
 namespace shape_recognizer
 {
-    class Serializer
+    static class Serializer
     {
         public static void SerializeList(List<Point> list, string fileName)
         {
