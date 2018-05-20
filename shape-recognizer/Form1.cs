@@ -193,6 +193,11 @@ namespace shape_recognizer
             bitmap.Save(@"C:\Users\datafile4\Desktop\samples\graphics.bmp",ImageFormat.Bmp);
             Serializer.SerializeList(previousPointList, @"C:\Users\datafile4\Desktop\samples\original.xml");
         }
+
+        private void buttonClassify_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
