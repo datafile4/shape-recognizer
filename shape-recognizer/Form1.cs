@@ -146,7 +146,7 @@ namespace shape_recognizer
                     foreach(List<Point> edge in edges)
                     {
                         List<Point> desu = edge.OrderBy(x => Math.Atan2(x.X, x.Y)).ToList();
-                        Serializer.SerializeList(desu, @"C:\Users\datafile4\Desktop\samples\fromimage.xml");
+                        //Serializer.SerializeList(desu, @"C:\Users\datafile4\Desktop\samples\fromimage.xml");
                         ShapeRecognition recognizer = new ShapeRecognition(new Polygon2D(desu));
                         Polygon2D convexHull = recognizer.ConvexHull;
                         List<Point> convexHullPoints = convexHull.Points;
