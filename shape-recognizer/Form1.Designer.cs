@@ -48,6 +48,7 @@
             this.classifiedShapeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.buttonSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonClassify = new System.Windows.Forms.Button();
             this.comboBoxShapeClass = new System.Windows.Forms.ComboBox();
             this.buttonDataGridClear = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -57,7 +58,6 @@
             this.buttonLoadImage = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialogImage = new System.Windows.Forms.OpenFileDialog();
-            this.buttonClassify = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClassifiedShape)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.classifiedShapeBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
@@ -245,6 +245,16 @@
             this.panel1.Size = new System.Drawing.Size(480, 100);
             this.panel1.TabIndex = 12;
             // 
+            // buttonClassify
+            // 
+            this.buttonClassify.Location = new System.Drawing.Point(294, 47);
+            this.buttonClassify.Name = "buttonClassify";
+            this.buttonClassify.Size = new System.Drawing.Size(75, 23);
+            this.buttonClassify.TabIndex = 12;
+            this.buttonClassify.Text = "Classify";
+            this.buttonClassify.UseVisualStyleBackColor = true;
+            this.buttonClassify.Click += new System.EventHandler(this.buttonClassify_Click);
+            // 
             // comboBoxShapeClass
             // 
             this.comboBoxShapeClass.FormattingEnabled = true;
@@ -282,7 +292,7 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(313, 355);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
+            this.tabPage1.Text = "Draw Shape";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // buttonSavePolygon
@@ -304,7 +314,7 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(313, 355);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
+            this.tabPage2.Text = "Upload Image";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // buttonLoadImage
@@ -330,16 +340,6 @@
             this.openFileDialogImage.FileName = "openFileDialog1";
             this.openFileDialogImage.Filter = "Jpeg Images|*.jpg";
             this.openFileDialogImage.Title = "Open Image:";
-            // 
-            // buttonClassify
-            // 
-            this.buttonClassify.Location = new System.Drawing.Point(294, 47);
-            this.buttonClassify.Name = "buttonClassify";
-            this.buttonClassify.Size = new System.Drawing.Size(75, 23);
-            this.buttonClassify.TabIndex = 12;
-            this.buttonClassify.Text = "Classify";
-            this.buttonClassify.UseVisualStyleBackColor = true;
-            this.buttonClassify.Click += new System.EventHandler(this.buttonClassify_Click);
             // 
             // Form1
             // 

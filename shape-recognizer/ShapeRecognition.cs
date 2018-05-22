@@ -165,5 +165,16 @@ namespace shape_recognizer
         {
             return AreaTriangle(NestedTriangle) / PolygonArea(ConvexHull);
         }
+
+        //public Relations ProcessImage(Image image)
+        //{
+        //    ImageHandler imageHandler = new ImageHandler(new Bitmap(image));
+        //    List<List<Point>> edges = imageHandler.GetEdges();
+        //    foreach (List<Point> edge in edges)
+        //    {
+        //        List<Point> sortedPoints = edge.OrderBy(x => Math.Atan2(x.X, x.Y)).ToList();
+
+        //    }
+        //}
     }
 }

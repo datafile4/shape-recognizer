@@ -145,8 +145,7 @@ namespace shape_recognizer
                     Graphics graphics = Graphics.FromImage(tempDraw);
                     foreach(List<Point> edge in edges)
                     {
-                        List<Point> desu = edge.OrderBy(x => Math.Atan2(x.X, x.Y)).ToList();
-                        //Serializer.SerializeList(desu, @"C:\Users\datafile4\Desktop\samples\fromimage.xml");
+                        List<Point> desu = edge.OrderBy(x => Math.Atan2(x.X, x.Y)).ToList();                        
                         ShapeRecognition recognizer = new ShapeRecognition(new Polygon2D(desu));
                         Polygon2D convexHull = recognizer.ConvexHull;
                         List<Point> convexHullPoints = convexHull.Points;
@@ -159,13 +158,13 @@ namespace shape_recognizer
                         graphics.DrawRectangle(new Pen(Color.Blue), recognizer.BoundingRectangle);
                         DrawTriangle(graphics, recognizer.NestedTriangle);
                         currentRelation = recognizer.GetRelations();
+                        ShapeClass selectedClassItem = (ShapeClass)comboBoxShapeClass.SelectedItem;
+                        ClassifiedShape classifiedShape = new ClassifiedShape(currentRelation, selectedClassItem);
+                        classifiedShapeBindingSource.Add(classifiedShape);
                     }
                     pictureBox1.Image = tempDraw;
                     break;
-            }
-            ShapeClass selectedClassItem = (ShapeClass)comboBoxShapeClass.SelectedItem;
-            ClassifiedShape classifiedShape = new ClassifiedShape(currentRelation, selectedClassItem);
-            classifiedShapeBindingSource.Add(classifiedShape);
+            }          
         }
 
         private void buttonDataGridClear_Click(object sender, EventArgs e)
