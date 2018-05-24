@@ -22,10 +22,19 @@ namespace shape_recognizer
             Features = new List<Relations>();
         }
 
-        //public void InitDB(){
-        //    string checkTable = "SELECT name FROM sqlite_master WHERE type = 'table'ORDER BY name";
+        public void InitDB()
+        {
+            SQLiteConnection.CreateFile("ShapeRecognizer.sqlite");
+            SQLiteConnection m_dbConnection = new SQLiteConnection("Data Source=MyDatabase.sqlite;Version=3;");
 
-        //    SQLiteCommand command = new SQLiteCommand()
-        //}
+            string sql = "create table shapes (id integer primary key, name text not null)";
+            SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
+            command.ExecuteNonQuery();
+            //SQLiteCommand command = new SQLiteCommand(sql, m_dbConnection);
+            //SQLiteDataReader reader = command.ExecuteReader();
+            //reader.Read
+            
+        }
+        
     }
 }
