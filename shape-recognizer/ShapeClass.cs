@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using CsvHelper;
+using CsvHelper.Configuration;
 
 namespace shape_recognizer
 {
@@ -22,6 +24,7 @@ namespace shape_recognizer
     class ClassifiedShape
     {
         //public Relations relations { get; private set; }
+        
         public ShapeClass shapeClass { get; private set; }
         public double LenPch { get; private set; }
         public double Pch2Ach { get; private set; }
