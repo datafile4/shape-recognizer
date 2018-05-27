@@ -203,56 +203,21 @@ namespace shape_recognizer
 
         private void buttonSaveCSV_Click(object sender, EventArgs e)
         {
-            using (TextWriter textWriter = File.CreateText("Data.csv"))
+            List<ClassifiedShape> records = new List<ClassifiedShape>();
+            foreach(DataGridViewRow i in dataGridViewClassifiedShape.Rows)
             {
-                var csv = new CsvWriter(textWriter);
-                csv.WriteHeader<ClassifiedShape>();                
-                
-                csv.NextRecord();
-                foreach (DataGridViewRow row in dataGridViewClassifiedShape.Rows)
-                {
-                    ClassifiedShape i = row.DataBoundItem as ClassifiedShape;
-                    if (i != null)
-                    {
-                        csv.WriteRecord(i);
-                    }
-                }
-                csv.Flush();
-            }                          
+                records.Add(i.DataBoundItem as ClassifiedShape);
+            }
+            Database.WriteDB(records);
         }
 
         private void buttonLoadCSV_Click(object sender, EventArgs e)
         {
-            //IEnumerable<ShapeClass> records;
-            using (TextReader textReader = File.OpenText("Data.csv"))
+            List<ClassifiedShape> records = Database.ReadDB();
+            foreach (ClassifiedShape i in records)
             {
-                //Debug.WriteLine("Original: " + textReader.ReadToEnd());
-                var csv = new CsvReader(textReader);
-                csv.Configuration.HasHeaderRecord = true;
-                //var records = csv.GetRecords<ClassifiedShape>().ToList();
-                //Debug.WriteLine(records.ToString());
-                csv.Read();
-                csv.ReadHeader();
-                List<ClassifiedShape> classifiedShapes = new List<ClassifiedShape>();
-                while (csv.Read())
-                {
-                    Relations relations = new Relations();
-                    //LenPch,Pch2Ach,AltAch,PchPer,AchAerAlt
-                    ShapeClass shapeClass = csv.GetField<ShapeClass>("shapeClass");
-                    relations.LenPch = csv.GetField<double>("LenPch");
-                    relations.Pch2Ach = csv.GetField<double>("Pch2Ach");
-                    relations.AltAch = csv.GetField<double>("AltAch");
-                    relations.PchPer = csv.GetField<double>("PchPer");
-                    relations.AchAerAlt = csv.GetField<double>("AchAerAlt");
-                    classifiedShapes.Add(new ClassifiedShape(relations,shapeClass));
-                }                
-                foreach (ClassifiedShape i in classifiedShapes)
-                {
-                    classifiedShapeBindingSource.Add(i);
-                }
-                //dataGridViewBindingSource.ResetBindings(true);
-                //dataGridViewClassifiedShape.Refresh();
-            }            
+                classifiedShapeBindingSource.Add(i);
+            }
         }
     }
 }
