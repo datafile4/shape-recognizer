@@ -50,6 +50,7 @@ namespace shape_recognizer
                     if (i != null)
                     {
                         csv.WriteRecord(i);
+                        csv.NextRecord();
                     }
                 }
                 csv.Flush();
