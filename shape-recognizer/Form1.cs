@@ -141,8 +141,7 @@ namespace shape_recognizer
                     ClearCanvas();
                     break;
                 case 1:
-                    ImageHandler imageHandler = new ImageHandler(new Bitmap(pictureBox1.Image));
-                    // pictureBox1.Image = imageHandler.GetEdge();
+                    ImageHandler imageHandler = new ImageHandler(new Bitmap(pictureBox1.Image));                    
                     List<List<Point>> edges = imageHandler.GetEdges();
                     Bitmap tempDraw = new Bitmap(pictureBox1.Image);
                     Graphics graphics = Graphics.FromImage(tempDraw);
@@ -160,14 +159,14 @@ namespace shape_recognizer
                         labelConvHullPntCntVal.Text = convexHullPoints.Count().ToString();
                         graphics.DrawRectangle(new Pen(Color.Blue), recognizer.BoundingRectangle);
                         DrawTriangle(graphics, recognizer.NestedTriangle);
-                        currentRelation = recognizer.GetRelations();
-                        ShapeClass selectedClassItem = (ShapeClass)comboBoxShapeClass.SelectedItem;
-                        ClassifiedShape classifiedShape = new ClassifiedShape(currentRelation, selectedClassItem);
-                        classifiedShapeBindingSource.Add(classifiedShape);
+                        currentRelation = recognizer.GetRelations();                        
                     }
                     pictureBox1.Image = tempDraw;
                     break;
-            }          
+            }
+            ShapeClass selectedClassItem = (ShapeClass)comboBoxShapeClass.SelectedItem;
+            ClassifiedShape classifiedShape = new ClassifiedShape(currentRelation, selectedClassItem);
+            classifiedShapeBindingSource.Add(classifiedShape);
         }
 
         private void buttonDataGridClear_Click(object sender, EventArgs e)
@@ -196,9 +195,34 @@ namespace shape_recognizer
             Serializer.SerializeList(previousPointList, @"C:\Users\datafile4\Desktop\samples\original.xml");
         }
 
+        private List<ClassifiedShape> GroupHistory(List<ClassifiedShape> records)
+        {
+            var groupedList = records
+               .GroupBy(u => new { shapeClass = u.shapeClass })
+               .Select(g => new ClassifiedShape(new Relations
+               {
+                   AchAerAlt = g.Average(p => p.AchAerAlt),
+                   PchPer = g.Average(p => p.PchPer),
+                   AltAch = g.Average(p => p.AltAch),
+                   Pch2Ach = g.Average(p => p.Pch2Ach),
+                   LenPch = g.Average(p => p.LenPch),
+                   AltAer = g.Average(p => p.AltAer)
+               }, g.Key.shapeClass)).ToList<ClassifiedShape>();
+            return groupedList;
+        }
+
         private void buttonClassify_Click(object sender, EventArgs e)
         {
-
+            List<ClassifiedShape> records = new List<ClassifiedShape>();
+            foreach (DataGridViewRow i in dataGridViewClassifiedShape.Rows)
+            {
+                records.Add(i.DataBoundItem as ClassifiedShape);
+            }
+            var groupedList = GroupHistory(records);
+            foreach(var i in groupedList)
+            {
+                Debug.WriteLine(i.shapeClass + " " + i.PchPer + " " + i.AchAerAlt);
+            }
         }
 
         private void buttonSaveCSV_Click(object sender, EventArgs e)
@@ -217,6 +241,27 @@ namespace shape_recognizer
             foreach (ClassifiedShape i in records)
             {
                 classifiedShapeBindingSource.Add(i);
+            }
+        }
+
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+
+        }
+
+        private void dataGridViewClassifiedShape_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            dataGridViewStatistics.Rows.Clear();
+            dataGridViewStatistics.Refresh();
+            List<ClassifiedShape> records = new List<ClassifiedShape>();
+            foreach (DataGridViewRow i in dataGridViewClassifiedShape.Rows)
+            {
+                records.Add(i.DataBoundItem as ClassifiedShape);
+            }
+            var groupedList = GroupHistory(records);
+            foreach (var i in groupedList)
+            {
+                classifiedShapeBindingSource1.Add(i);
             }
         }
     }

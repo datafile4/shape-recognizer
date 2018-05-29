@@ -36,6 +36,7 @@ namespace shape_recognizer
             relations.Pch2Ach = perimeterCH / areaCH;
             relations.PchPer = perimeterCH / (2 * (BoundingRectangle.Width + BoundingRectangle.Height));
             relations.AchAerAlt = Math.Pow(areaCH, 2) / (areaRectangle * areaTriangle);
+            relations.AltAer = areaTriangle / areaRectangle;
             return relations;
         }
 

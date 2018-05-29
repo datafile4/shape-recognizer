@@ -16,6 +16,7 @@ namespace shape_recognizer
         public double AltAch;
         public double PchPer;
         public double AchAerAlt;
+        public double AltAer;
     }
     
     public enum ShapeClass {Rectangle, Cirle, Triangle, Line, Ellipse, Diamond };
@@ -31,6 +32,7 @@ namespace shape_recognizer
         public double AltAch { get; private set; }
         public double PchPer { get; private set; }
         public double AchAerAlt { get; private set; }
+        public double AltAer { get; private set; }
 
         public ClassifiedShape(Relations relations, ShapeClass shapeClass)
         {
@@ -40,7 +42,15 @@ namespace shape_recognizer
             AltAch = Math.Round(relations.AltAch, 5);
             PchPer = Math.Round(relations.PchPer, 5);
             AchAerAlt = Math.Round(relations.AchAerAlt, 5);
+            AltAer = Math.Round(relations.AltAer, 5);
             this.shapeClass = shapeClass;
+        }
+
+        public override string ToString()
+        {
+            return "Class: " + shapeClass + " LenPch:" + LenPch 
+                + " Pch2Ach:" + Pch2Ach + " AltAch:" + AltAch
+                + " PchPer:"+ PchPer + " AchAerAlt:"+ AchAerAlt;
         }
     }
 }
