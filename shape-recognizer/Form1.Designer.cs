@@ -39,7 +39,14 @@
             this.labelCHPerimeter = new System.Windows.Forms.Label();
             this.labelCHPerimeterValue = new System.Windows.Forms.Label();
             this.dataGridViewClassifiedShape = new System.Windows.Forms.DataGridView();
+            this.shapeClassDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lenPchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pch2AchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.altAchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pchPerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.achAerAltDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AltAer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.classifiedShapeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.buttonSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonClassify = new System.Windows.Forms.Button();
@@ -62,15 +69,9 @@
             this.pchPerDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.achAerAltDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.classifiedShapeBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.shapeClassDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lenPchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pch2AchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.altAchDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pchPerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.achAerAltDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.classifiedShapeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.labelStatistics = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClassifiedShape)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.classifiedShapeBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -78,7 +79,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStatistics)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.classifiedShapeBindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.classifiedShapeBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // graphPanel
@@ -181,6 +181,60 @@
             this.dataGridViewClassifiedShape.TabIndex = 10;
             this.dataGridViewClassifiedShape.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.dataGridViewClassifiedShape_RowsAdded);
             // 
+            // shapeClassDataGridViewTextBoxColumn
+            // 
+            this.shapeClassDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.shapeClassDataGridViewTextBoxColumn.DataPropertyName = "shapeClass";
+            this.shapeClassDataGridViewTextBoxColumn.HeaderText = "shapeClass";
+            this.shapeClassDataGridViewTextBoxColumn.Name = "shapeClassDataGridViewTextBoxColumn";
+            this.shapeClassDataGridViewTextBoxColumn.ReadOnly = true;
+            this.shapeClassDataGridViewTextBoxColumn.Width = 86;
+            // 
+            // lenPchDataGridViewTextBoxColumn
+            // 
+            this.lenPchDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.lenPchDataGridViewTextBoxColumn.DataPropertyName = "LenPch";
+            this.lenPchDataGridViewTextBoxColumn.HeaderText = "LenPch";
+            this.lenPchDataGridViewTextBoxColumn.Name = "lenPchDataGridViewTextBoxColumn";
+            this.lenPchDataGridViewTextBoxColumn.ReadOnly = true;
+            this.lenPchDataGridViewTextBoxColumn.Width = 69;
+            // 
+            // pch2AchDataGridViewTextBoxColumn
+            // 
+            this.pch2AchDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.pch2AchDataGridViewTextBoxColumn.DataPropertyName = "Pch2Ach";
+            this.pch2AchDataGridViewTextBoxColumn.HeaderText = "Pch2Ach";
+            this.pch2AchDataGridViewTextBoxColumn.Name = "pch2AchDataGridViewTextBoxColumn";
+            this.pch2AchDataGridViewTextBoxColumn.ReadOnly = true;
+            this.pch2AchDataGridViewTextBoxColumn.Width = 76;
+            // 
+            // altAchDataGridViewTextBoxColumn
+            // 
+            this.altAchDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.altAchDataGridViewTextBoxColumn.DataPropertyName = "AltAch";
+            this.altAchDataGridViewTextBoxColumn.HeaderText = "AltAch";
+            this.altAchDataGridViewTextBoxColumn.Name = "altAchDataGridViewTextBoxColumn";
+            this.altAchDataGridViewTextBoxColumn.ReadOnly = true;
+            this.altAchDataGridViewTextBoxColumn.Width = 63;
+            // 
+            // pchPerDataGridViewTextBoxColumn
+            // 
+            this.pchPerDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.pchPerDataGridViewTextBoxColumn.DataPropertyName = "PchPer";
+            this.pchPerDataGridViewTextBoxColumn.HeaderText = "PchPer";
+            this.pchPerDataGridViewTextBoxColumn.Name = "pchPerDataGridViewTextBoxColumn";
+            this.pchPerDataGridViewTextBoxColumn.ReadOnly = true;
+            this.pchPerDataGridViewTextBoxColumn.Width = 67;
+            // 
+            // achAerAltDataGridViewTextBoxColumn
+            // 
+            this.achAerAltDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.achAerAltDataGridViewTextBoxColumn.DataPropertyName = "AchAerAlt";
+            this.achAerAltDataGridViewTextBoxColumn.HeaderText = "AchAerAlt";
+            this.achAerAltDataGridViewTextBoxColumn.Name = "achAerAltDataGridViewTextBoxColumn";
+            this.achAerAltDataGridViewTextBoxColumn.ReadOnly = true;
+            this.achAerAltDataGridViewTextBoxColumn.Width = 79;
+            // 
             // AltAer
             // 
             this.AltAer.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
@@ -189,6 +243,10 @@
             this.AltAer.Name = "AltAer";
             this.AltAer.ReadOnly = true;
             this.AltAer.Width = 60;
+            // 
+            // classifiedShapeBindingSource
+            // 
+            this.classifiedShapeBindingSource.DataSource = typeof(shape_recognizer.ClassifiedShape);
             // 
             // buttonSave
             // 
@@ -405,64 +463,6 @@
             // 
             this.classifiedShapeBindingSource1.DataSource = typeof(shape_recognizer.ClassifiedShape);
             // 
-            // shapeClassDataGridViewTextBoxColumn
-            // 
-            this.shapeClassDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.shapeClassDataGridViewTextBoxColumn.DataPropertyName = "shapeClass";
-            this.shapeClassDataGridViewTextBoxColumn.HeaderText = "shapeClass";
-            this.shapeClassDataGridViewTextBoxColumn.Name = "shapeClassDataGridViewTextBoxColumn";
-            this.shapeClassDataGridViewTextBoxColumn.ReadOnly = true;
-            this.shapeClassDataGridViewTextBoxColumn.Width = 86;
-            // 
-            // lenPchDataGridViewTextBoxColumn
-            // 
-            this.lenPchDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.lenPchDataGridViewTextBoxColumn.DataPropertyName = "LenPch";
-            this.lenPchDataGridViewTextBoxColumn.HeaderText = "LenPch";
-            this.lenPchDataGridViewTextBoxColumn.Name = "lenPchDataGridViewTextBoxColumn";
-            this.lenPchDataGridViewTextBoxColumn.ReadOnly = true;
-            this.lenPchDataGridViewTextBoxColumn.Width = 69;
-            // 
-            // pch2AchDataGridViewTextBoxColumn
-            // 
-            this.pch2AchDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.pch2AchDataGridViewTextBoxColumn.DataPropertyName = "Pch2Ach";
-            this.pch2AchDataGridViewTextBoxColumn.HeaderText = "Pch2Ach";
-            this.pch2AchDataGridViewTextBoxColumn.Name = "pch2AchDataGridViewTextBoxColumn";
-            this.pch2AchDataGridViewTextBoxColumn.ReadOnly = true;
-            this.pch2AchDataGridViewTextBoxColumn.Width = 76;
-            // 
-            // altAchDataGridViewTextBoxColumn
-            // 
-            this.altAchDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.altAchDataGridViewTextBoxColumn.DataPropertyName = "AltAch";
-            this.altAchDataGridViewTextBoxColumn.HeaderText = "AltAch";
-            this.altAchDataGridViewTextBoxColumn.Name = "altAchDataGridViewTextBoxColumn";
-            this.altAchDataGridViewTextBoxColumn.ReadOnly = true;
-            this.altAchDataGridViewTextBoxColumn.Width = 63;
-            // 
-            // pchPerDataGridViewTextBoxColumn
-            // 
-            this.pchPerDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.pchPerDataGridViewTextBoxColumn.DataPropertyName = "PchPer";
-            this.pchPerDataGridViewTextBoxColumn.HeaderText = "PchPer";
-            this.pchPerDataGridViewTextBoxColumn.Name = "pchPerDataGridViewTextBoxColumn";
-            this.pchPerDataGridViewTextBoxColumn.ReadOnly = true;
-            this.pchPerDataGridViewTextBoxColumn.Width = 67;
-            // 
-            // achAerAltDataGridViewTextBoxColumn
-            // 
-            this.achAerAltDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.achAerAltDataGridViewTextBoxColumn.DataPropertyName = "AchAerAlt";
-            this.achAerAltDataGridViewTextBoxColumn.HeaderText = "AchAerAlt";
-            this.achAerAltDataGridViewTextBoxColumn.Name = "achAerAltDataGridViewTextBoxColumn";
-            this.achAerAltDataGridViewTextBoxColumn.ReadOnly = true;
-            this.achAerAltDataGridViewTextBoxColumn.Width = 79;
-            // 
-            // classifiedShapeBindingSource
-            // 
-            this.classifiedShapeBindingSource.DataSource = typeof(shape_recognizer.ClassifiedShape);
-            // 
             // labelStatistics
             // 
             this.labelStatistics.AutoSize = true;
@@ -501,6 +501,7 @@
             this.Text = "Shape Recognizer";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClassifiedShape)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.classifiedShapeBindingSource)).EndInit();
             this.panel1.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -508,7 +509,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStatistics)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.classifiedShapeBindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.classifiedShapeBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

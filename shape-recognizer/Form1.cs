@@ -25,6 +25,7 @@ namespace shape_recognizer
         List<Point> previousPointList = new List<Point>();
         Relations currentRelation;
         BindingSource dataGridViewBindingSource = new BindingSource();
+        private List<ClassifiedShape> features;
 
         public Form1()
         {
@@ -166,6 +167,12 @@ namespace shape_recognizer
             }
             ShapeClass selectedClassItem = (ShapeClass)comboBoxShapeClass.SelectedItem;
             ClassifiedShape classifiedShape = new ClassifiedShape(currentRelation, selectedClassItem);
+            ShapeClass shapeClass = Classifier.Classify(classifiedShape, features);
+
+            string messageBoxText = "Class: " + shapeClass.ToString();
+            string caption = "Class";
+            MessageBoxButtons button = MessageBoxButtons.OK;
+            MessageBox.Show(messageBoxText, caption, button);
             classifiedShapeBindingSource.Add(classifiedShape);
         }
 
@@ -213,16 +220,17 @@ namespace shape_recognizer
 
         private void buttonClassify_Click(object sender, EventArgs e)
         {
-            List<ClassifiedShape> records = new List<ClassifiedShape>();
-            foreach (DataGridViewRow i in dataGridViewClassifiedShape.Rows)
-            {
-                records.Add(i.DataBoundItem as ClassifiedShape);
-            }
-            var groupedList = GroupHistory(records);
-            foreach(var i in groupedList)
-            {
-                Debug.WriteLine(i.shapeClass + " " + i.PchPer + " " + i.AchAerAlt);
-            }
+            //List<ClassifiedShape> records = new List<ClassifiedShape>();
+            //foreach (DataGridViewRow i in dataGridViewClassifiedShape.Rows)
+            //{
+            //    records.Add(i.DataBoundItem as ClassifiedShape);
+            //}
+            //var groupedList = GroupHistory(records);
+            //foreach(var i in groupedList)
+            //{
+            //    Debug.WriteLine(i.shapeClass + " " + i.PchPer + " " + i.AchAerAlt);
+            //}
+            
         }
 
         private void buttonSaveCSV_Click(object sender, EventArgs e)
@@ -258,12 +266,12 @@ namespace shape_recognizer
             {
                 records.Add(i.DataBoundItem as ClassifiedShape);
             }
-            var groupedList = GroupHistory(records);
-            foreach (var i in groupedList)
+            features = GroupHistory(records);
+            foreach (var i in features)
             {
                 classifiedShapeBindingSource1.Add(i);
             }
-        }
+        }        
     }
 }
 
