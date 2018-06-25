@@ -167,12 +167,12 @@ namespace shape_recognizer
             }
             ShapeClass selectedClassItem = (ShapeClass)comboBoxShapeClass.SelectedItem;
             ClassifiedShape classifiedShape = new ClassifiedShape(currentRelation, selectedClassItem);
-            ShapeClass shapeClass = Classifier.Classify(classifiedShape, features);
+            //ShapeClass shapeClass = Classifier.Classify(classifiedShape, features);
 
-            string messageBoxText = "Class: " + shapeClass.ToString();
-            string caption = "Class";
-            MessageBoxButtons button = MessageBoxButtons.OK;
-            MessageBox.Show(messageBoxText, caption, button);
+            //string messageBoxText = "Class: " + shapeClass.ToString();
+            //string caption = "Class";
+            //MessageBoxButtons button = MessageBoxButtons.OK;
+            //MessageBox.Show(messageBoxText, caption, button);
             classifiedShapeBindingSource.Add(classifiedShape);
         }
 
@@ -271,7 +271,17 @@ namespace shape_recognizer
             {
                 classifiedShapeBindingSource1.Add(i);
             }
-        }        
+        }
+
+        private void openFileDialogImage_FileOk(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void buttonLoadImageMult_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();            
+        }
     }
 }
 

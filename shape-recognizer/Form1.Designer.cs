@@ -70,6 +70,8 @@
             this.achAerAltDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.classifiedShapeBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.labelStatistics = new System.Windows.Forms.Label();
+            this.buttonLoadImageMult = new System.Windows.Forms.Button();
+            this.openFileDialogImageMultiple = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClassifiedShape)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.classifiedShapeBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
@@ -292,7 +294,7 @@
             // 
             // buttonDataGridClear
             // 
-            this.buttonDataGridClear.Location = new System.Drawing.Point(523, 168);
+            this.buttonDataGridClear.Location = new System.Drawing.Point(392, 168);
             this.buttonDataGridClear.Name = "buttonDataGridClear";
             this.buttonDataGridClear.Size = new System.Drawing.Size(75, 23);
             this.buttonDataGridClear.TabIndex = 12;
@@ -346,7 +348,7 @@
             // 
             // buttonLoadImage
             // 
-            this.buttonLoadImage.Location = new System.Drawing.Point(120, 313);
+            this.buttonLoadImage.Location = new System.Drawing.Point(117, 320);
             this.buttonLoadImage.Name = "buttonLoadImage";
             this.buttonLoadImage.Size = new System.Drawing.Size(75, 23);
             this.buttonLoadImage.TabIndex = 1;
@@ -367,10 +369,11 @@
             this.openFileDialogImage.FileName = "openFileDialog1";
             this.openFileDialogImage.Filter = "Jpeg Images|*.jpg";
             this.openFileDialogImage.Title = "Open Image:";
+            this.openFileDialogImage.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialogImage_FileOk);
             // 
             // buttonSaveCSV
             // 
-            this.buttonSaveCSV.Location = new System.Drawing.Point(605, 168);
+            this.buttonSaveCSV.Location = new System.Drawing.Point(473, 168);
             this.buttonSaveCSV.Name = "buttonSaveCSV";
             this.buttonSaveCSV.Size = new System.Drawing.Size(94, 23);
             this.buttonSaveCSV.TabIndex = 13;
@@ -380,7 +383,7 @@
             // 
             // buttonLoadCSV
             // 
-            this.buttonLoadCSV.Location = new System.Drawing.Point(706, 168);
+            this.buttonLoadCSV.Location = new System.Drawing.Point(573, 168);
             this.buttonLoadCSV.Name = "buttonLoadCSV";
             this.buttonLoadCSV.Size = new System.Drawing.Size(95, 23);
             this.buttonLoadCSV.TabIndex = 14;
@@ -473,11 +476,29 @@
             this.labelStatistics.TabIndex = 16;
             this.labelStatistics.Text = "Features";
             // 
+            // buttonLoadImageMult
+            // 
+            this.buttonLoadImageMult.Location = new System.Drawing.Point(675, 168);
+            this.buttonLoadImageMult.Name = "buttonLoadImageMult";
+            this.buttonLoadImageMult.Size = new System.Drawing.Size(103, 23);
+            this.buttonLoadImageMult.TabIndex = 17;
+            this.buttonLoadImageMult.Text = "Multiple Images";
+            this.buttonLoadImageMult.UseVisualStyleBackColor = true;
+            this.buttonLoadImageMult.Click += new System.EventHandler(this.buttonLoadImageMult_Click);
+            // 
+            // openFileDialogImageMultiple
+            // 
+            this.openFileDialogImageMultiple.FileName = "openFileDialog1";
+            this.openFileDialogImageMultiple.Filter = "Jpeg Images|*.jpg";
+            this.openFileDialogImageMultiple.Multiselect = true;
+            this.openFileDialogImageMultiple.Title = "Open Image:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 467);
+            this.Controls.Add(this.buttonLoadImageMult);
             this.Controls.Add(this.labelStatistics);
             this.Controls.Add(this.dataGridViewStatistics);
             this.Controls.Add(this.buttonLoadCSV);
@@ -558,6 +579,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn achAerAltDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.Label labelStatistics;
+        private System.Windows.Forms.Button buttonLoadImageMult;
+        private System.Windows.Forms.OpenFileDialog openFileDialogImageMultiple;
     }
 }
 
