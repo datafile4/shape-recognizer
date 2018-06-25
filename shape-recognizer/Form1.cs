@@ -26,11 +26,22 @@ namespace shape_recognizer
         Relations currentRelation;
         BindingSource dataGridViewBindingSource = new BindingSource();
         private List<ClassifiedShape> features;
+        OpenFileDialog openFileDialogMultiple;
 
         public Form1()
         {
             InitializeComponent();
+            InitializeOpenFileDialogMultiple();
             comboBoxShapeClass.DataSource = Enum.GetValues(typeof(ShapeClass));
+        }
+
+        private void InitializeOpenFileDialogMultiple()
+        {
+            openFileDialogMultiple = new OpenFileDialog();
+            openFileDialogMultiple.Filter = "Images (*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|" +
+                "All files (*.*)|*.*";
+            openFileDialogMultiple.Multiselect = true;
+            openFileDialogMultiple.Title = "Select Multiple Images:";
         }
 
         private void DrawTriangle(Triangle triangle)
@@ -280,7 +291,11 @@ namespace shape_recognizer
 
         private void buttonLoadImageMult_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();            
+            
+            if(openFileDialogMultiple.ShowDialog() == DialogResult.OK)
+            {
+                //null;
+            }
         }
     }
 }

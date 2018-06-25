@@ -71,7 +71,6 @@
             this.classifiedShapeBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.labelStatistics = new System.Windows.Forms.Label();
             this.buttonLoadImageMult = new System.Windows.Forms.Button();
-            this.openFileDialogImageMultiple = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClassifiedShape)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.classifiedShapeBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
@@ -486,13 +485,6 @@
             this.buttonLoadImageMult.UseVisualStyleBackColor = true;
             this.buttonLoadImageMult.Click += new System.EventHandler(this.buttonLoadImageMult_Click);
             // 
-            // openFileDialogImageMultiple
-            // 
-            this.openFileDialogImageMultiple.FileName = "openFileDialog1";
-            this.openFileDialogImageMultiple.Filter = "Jpeg Images|*.jpg";
-            this.openFileDialogImageMultiple.Multiselect = true;
-            this.openFileDialogImageMultiple.Title = "Open Image:";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -580,7 +572,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.Label labelStatistics;
         private System.Windows.Forms.Button buttonLoadImageMult;
-        private System.Windows.Forms.OpenFileDialog openFileDialogImageMultiple;
     }
 }
 
