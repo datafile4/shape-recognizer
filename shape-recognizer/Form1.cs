@@ -209,8 +209,8 @@ namespace shape_recognizer
             {
                 graphics.DrawLines(new Pen(Color.White), previousPointList.ToArray());
             }
-            bitmap.Save(@"C:\Users\datafile4\Desktop\samples\graphics.bmp",ImageFormat.Bmp);
-            Serializer.SerializeList(previousPointList, @"C:\Users\datafile4\Desktop\samples\original.xml");
+            //bitmap.Save(@"C:\Users\datafile4\Desktop\samples\graphics.bmp",ImageFormat.Bmp);
+            //Serializer.SerializeList(previousPointList, @"C:\Users\datafile4\Desktop\samples\original.xml");
         }
 
         private List<ClassifiedShape> GroupHistory(List<ClassifiedShape> records)
@@ -241,7 +241,36 @@ namespace shape_recognizer
             //{
             //    Debug.WriteLine(i.shapeClass + " " + i.PchPer + " " + i.AchAerAlt);
             //}
+            ImageHandler imageHandler = new ImageHandler(new Bitmap(pictureBox1.Image));
+            List<List<Point>> edges = imageHandler.GetEdges();
+            Bitmap tempDraw = new Bitmap(pictureBox1.Image);
+            Graphics graphics = Graphics.FromImage(tempDraw);
+            Relations relation = new Relations();
+            foreach (List<Point> edge in edges)
+            {
+                List<Point> desu = edge.OrderBy(x => Math.Atan2(x.X, x.Y)).ToList();
+                ShapeRecognition recognizer = new ShapeRecognition(new Polygon2D(desu));
+                Polygon2D convexHull = recognizer.ConvexHull;
+                List<Point> convexHullPoints = convexHull.Points;
+                for (int i = 1; i < convexHullPoints.Count(); i++)
+                {
+                    graphics.DrawLine(new Pen(Color.Red), convexHullPoints[i - 1], convexHullPoints[i]);
+                }
+                labelShapePointCountVal.Text = pointList.Count.ToString();
+                labelConvHullPntCntVal.Text = convexHullPoints.Count().ToString();
+                graphics.DrawRectangle(new Pen(Color.Blue), recognizer.BoundingRectangle);
+                DrawTriangle(graphics, recognizer.NestedTriangle);
+                relation = recognizer.GetRelations();
+            }
+            pictureBox1.Image = tempDraw;
             
+            ClassifiedShape classifiedShape = new ClassifiedShape(relation, ShapeClass.Rectangle);
+            ShapeClass shapeClass = Classifier.Classify(classifiedShape, features);
+            string messageBoxText = "Class: " + shapeClass.ToString();
+            string caption = "Class";
+            MessageBoxButtons button = MessageBoxButtons.OK;
+            MessageBox.Show(messageBoxText, caption, button);
+
         }
 
         private void buttonSaveCSV_Click(object sender, EventArgs e)
