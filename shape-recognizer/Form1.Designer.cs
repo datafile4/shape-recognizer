@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.graphPanel = new System.Windows.Forms.Panel();
             this.buttonClear = new System.Windows.Forms.Button();
             this.labelPoint = new System.Windows.Forms.Label();
             this.labelShapePointCount = new System.Windows.Forms.Label();
@@ -52,10 +51,6 @@
             this.buttonClassify = new System.Windows.Forms.Button();
             this.comboBoxShapeClass = new System.Windows.Forms.ComboBox();
             this.buttonDataGridClear = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.buttonSavePolygon = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.buttonLoadImage = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialogImage = new System.Windows.Forms.OpenFileDialog();
@@ -71,27 +66,15 @@
             this.classifiedShapeBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.labelStatistics = new System.Windows.Forms.Label();
             this.buttonLoadImageMult = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClassifiedShape)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.classifiedShapeBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStatistics)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.classifiedShapeBindingSource1)).BeginInit();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // graphPanel
-            // 
-            this.graphPanel.BackColor = System.Drawing.Color.White;
-            this.graphPanel.Location = new System.Drawing.Point(6, 6);
-            this.graphPanel.Name = "graphPanel";
-            this.graphPanel.Size = new System.Drawing.Size(300, 300);
-            this.graphPanel.TabIndex = 0;
-            this.graphPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.graphPanel_MouseDown);
-            this.graphPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.graphPanel_MouseMove);
-            this.graphPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.graphPanel_MouseUp);
             // 
             // buttonClear
             // 
@@ -301,53 +284,9 @@
             this.buttonDataGridClear.UseVisualStyleBackColor = true;
             this.buttonDataGridClear.Click += new System.EventHandler(this.buttonDataGridClear_Click);
             // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(321, 381);
-            this.tabControl1.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.buttonSavePolygon);
-            this.tabPage1.Controls.Add(this.graphPanel);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(313, 355);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Draw Shape";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // buttonSavePolygon
-            // 
-            this.buttonSavePolygon.Location = new System.Drawing.Point(108, 312);
-            this.buttonSavePolygon.Name = "buttonSavePolygon";
-            this.buttonSavePolygon.Size = new System.Drawing.Size(75, 23);
-            this.buttonSavePolygon.TabIndex = 0;
-            this.buttonSavePolygon.Text = "Save";
-            this.buttonSavePolygon.UseVisualStyleBackColor = true;
-            this.buttonSavePolygon.Click += new System.EventHandler(this.buttonSavePolygon_Click);
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.buttonLoadImage);
-            this.tabPage2.Controls.Add(this.pictureBox1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(313, 355);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Upload Image";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // buttonLoadImage
             // 
-            this.buttonLoadImage.Location = new System.Drawing.Point(117, 320);
+            this.buttonLoadImage.Location = new System.Drawing.Point(120, 309);
             this.buttonLoadImage.Name = "buttonLoadImage";
             this.buttonLoadImage.Size = new System.Drawing.Size(75, 23);
             this.buttonLoadImage.TabIndex = 1;
@@ -357,7 +296,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(7, 7);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(300, 300);
             this.pictureBox1.TabIndex = 0;
@@ -485,17 +424,26 @@
             this.buttonLoadImageMult.UseVisualStyleBackColor = true;
             this.buttonLoadImageMult.Click += new System.EventHandler(this.buttonLoadImageMult_Click);
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Controls.Add(this.buttonLoadImage);
+            this.panel2.Location = new System.Drawing.Point(12, 12);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(307, 360);
+            this.panel2.TabIndex = 18;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 467);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.buttonLoadImageMult);
             this.Controls.Add(this.labelStatistics);
             this.Controls.Add(this.dataGridViewStatistics);
             this.Controls.Add(this.buttonLoadCSV);
             this.Controls.Add(this.buttonSaveCSV);
-            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.buttonDataGridClear);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridViewClassifiedShape);
@@ -516,20 +464,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewClassifiedShape)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.classifiedShapeBindingSource)).EndInit();
             this.panel1.ResumeLayout(false);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStatistics)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.classifiedShapeBindingSource1)).EndInit();
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel graphPanel;
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.Label labelPoint;
         private System.Windows.Forms.Label labelShapePointCount;
@@ -544,13 +488,9 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox comboBoxShapeClass;
         private System.Windows.Forms.Button buttonDataGridClear;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button buttonLoadImage;
         private System.Windows.Forms.OpenFileDialog openFileDialogImage;
-        private System.Windows.Forms.Button buttonSavePolygon;
         private System.Windows.Forms.Button buttonClassify;
         private System.Windows.Forms.Button buttonSaveCSV;
         private System.Windows.Forms.Button buttonLoadCSV;
@@ -572,6 +512,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.Label labelStatistics;
         private System.Windows.Forms.Button buttonLoadImageMult;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 

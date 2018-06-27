@@ -74,16 +74,16 @@ namespace shape_recognizer
             }
         }
 
-        private void graphPanel_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                mouseIsDown = true;
-                graphObj = this.graphPanel.CreateGraphics();
-                _lastLoc = e.Location;
-                pointList.Add(e.Location);
-            }
-        }
+        //private void graphPanel_MouseDown(object sender, MouseEventArgs e)
+        //{
+        //    if (e.Button == MouseButtons.Left)
+        //    {
+        //        mouseIsDown = true;
+        //        graphObj = this.graphPanel.CreateGraphics();
+        //        _lastLoc = e.Location;
+        //        pointList.Add(e.Location);
+        //    }
+        //}
 
         private void graphPanel_MouseMove(object sender, MouseEventArgs e)
         {
@@ -119,16 +119,16 @@ namespace shape_recognizer
             previousPointList = pointList.ToList();
             pointList.Clear();
         }
-        public void ClearCanvas()
-        {
-            if (graphObj != null)
-            {
-                graphObj.Clear(graphPanel.BackColor);
-                labelConvHullPntCntVal.Text = "";
-                labelShapePointCountVal.Text = "";
-                labelCHPerimeterValue.Text = "";
-            }
-        }
+        //public void ClearCanvas()
+        //{
+        //    if (graphObj != null)
+        //    {
+        //        graphObj.Clear(graphPanel.BackColor);
+        //        labelConvHullPntCntVal.Text = "";
+        //        labelShapePointCountVal.Text = "";
+        //        labelCHPerimeterValue.Text = "";
+        //    }
+        //}
         //this is main function now
         private void graphPanel_MouseUp(object sender, MouseEventArgs e)
         {
@@ -137,7 +137,7 @@ namespace shape_recognizer
 
         private void buttonClear_Click(object sender, EventArgs e)
         {
-            ClearCanvas();
+            //ClearCanvas();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -147,12 +147,12 @@ namespace shape_recognizer
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            switch (tabControl1.SelectedIndex)
-            {
-                case 0:                   
-                    ClearCanvas();
-                    break;
-                case 1:
+            //switch (tabControl1.SelectedIndex)
+            //{
+            //    case 0:                   
+            //        ClearCanvas();
+            //        break;
+            //    case 1:
                     ImageHandler imageHandler = new ImageHandler(new Bitmap(pictureBox1.Image));                    
                     List<List<Point>> edges = imageHandler.GetEdges();
                     Bitmap tempDraw = new Bitmap(pictureBox1.Image);
@@ -174,8 +174,8 @@ namespace shape_recognizer
                         currentRelation = recognizer.GetRelations();                        
                     }
                     pictureBox1.Image = tempDraw;
-                    break;
-            }
+            //        break;
+            //}
             ShapeClass selectedClassItem = (ShapeClass)comboBoxShapeClass.SelectedItem;
             ClassifiedShape classifiedShape = new ClassifiedShape(currentRelation, selectedClassItem);
             //ShapeClass shapeClass = Classifier.Classify(classifiedShape, features);
